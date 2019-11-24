@@ -14,4 +14,4 @@ fun isUsernameValid(username: String) = username.length >= MIN_CREDENTIAL_LENGTH
 
 fun arePasswordsSame(password: String, repeatPassword: String) = isPasswordValid(password) && isPasswordValid(repeatPassword) && password==repeatPassword
 
-fun isValidJoke(jokeText: String) = jokeText.length >= MIN_JOKE_LENGTH
+fun isValidBook(bookText: String) = bookText.length >= MIN_JOKE_LENGTH

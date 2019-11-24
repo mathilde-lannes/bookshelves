@@ -6,12 +6,10 @@ fun loginPresenter() = component().loginPresenter()
 
 fun registerPresenter() = component().registerPresenter()
 
-fun allJokesPresenter() = component().allJokesPresenter()
-
-fun favoriteJokesPresenter() = component().favoriteJokesPresenter()
+fun allBooksPresenter() = component().allBooksPresenter()
 
 fun profilePresenter() = component().profilePresenter()
 
-fun addJokePresenter() = component().addJokePresenter()
+fun addBookPresenter() = component().addBookPresenter()
 
 fun welcomePresenter() = component().welcomePresenter()

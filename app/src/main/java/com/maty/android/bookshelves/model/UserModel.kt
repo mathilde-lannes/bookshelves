@@ -7,4 +7,4 @@ data class UserResponse(val id: String = "",
 data class User(val id: String,
                 val username: String,
                 val email: String,
-                val favoriteJokes: List<Joke> = listOf())
+                val favoriteBooks: List<Book> = listOf())

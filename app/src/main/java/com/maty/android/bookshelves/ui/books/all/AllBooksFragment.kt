@@ -1,4 +1,4 @@
-package com.maty.android.bookshelves.ui.jokes.all
+package com.maty.android.bookshelves.ui.books.all
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,18 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.maty.android.bookshelves.R
-import com.maty.android.bookshelves.allJokesPresenter
-import com.maty.android.bookshelves.model.Joke
-import com.maty.android.bookshelves.ui.jokes.all.list.JokeAdapter
-import kotlinx.android.synthetic.main.fragment_jokes.*
+import com.maty.android.bookshelves.allBooksPresenter
+import com.maty.android.bookshelves.model.Book
+import com.maty.android.bookshelves.ui.books.all.list.BookAdapter
+import kotlinx.android.synthetic.main.fragment_books.*
 
-class AllJokesFragment : Fragment(), AllJokesView {
+class AllBooksFragment : Fragment(), AllBooksView {
 
-  private val presenter by lazy { allJokesPresenter() }
-  private val adapter by lazy { JokeAdapter(presenter::onFavoriteButtonTapped) }
+  private val presenter by lazy { allBooksPresenter() }
+  private val adapter by lazy { BookAdapter(presenter::onFavoriteButtonTapped) }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_jokes, container, false)
+    return inflater.inflate(R.layout.fragment_books, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,15 +29,15 @@ class AllJokesFragment : Fragment(), AllJokesView {
     presenter.viewReady()
   }
 
-  override fun addJoke(joke: Joke) {
-    adapter.addJoke(joke)
+  override fun addBook(book: Book) {
+    adapter.addBook(book)
     noItems.visibility = if (adapter.itemCount!=0) View.INVISIBLE else View.VISIBLE
   }
 
   private fun initUi() {
-    jokes.layoutManager = LinearLayoutManager(activity)
-    jokes.setHasFixedSize(true)
-    jokes.adapter = adapter
+    books.layoutManager = LinearLayoutManager(activity)
+    books.setHasFixedSize(true)
+    books.adapter = adapter
   }
 
   override fun showNoDataDescription() {
@@ -48,5 +48,5 @@ class AllJokesFragment : Fragment(), AllJokesView {
     noItems.visibility = View.GONE
   }
 
-  override fun setFavoriteJokesIds(favoriteJokesIds: List<String>) = adapter.setFavoriteJokesIds(favoriteJokesIds)
+  override fun setFavoriteBooksIds(favoriteBooksIds: List<String>) = adapter.setFavoriteBooksIds(favoriteBooksIds)
 }

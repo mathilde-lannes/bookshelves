@@ -12,40 +12,28 @@
       android:layout_height="150dp">
 
     <TextView
-        android:id="@+id/jokeAuthor"
+        android:id="@+id/bookAuthor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@id/favoriteButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="AuthorName"/>
 
     <TextView
-        android:id="@+id/jokeDescription"
+        android:id="@+id/bookDescription"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:ellipsize="end"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/favoriteButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/jokeAuthor"
+        app:layout_constraintTop_toBottomOf="@id/bookAuthor"
         tools:text="To get to the other side To get to the other side To get to the other side To get to the other side To get to the other side To get to the other side To get to the other side To get to the other side To get to the other side To get to the other side"/>
 
-    <ImageView
-        android:id="@+id/favoriteButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:src="@drawable/ic_favorite_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
   </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

@@ -13,13 +13,11 @@ interface AppComponent {
 
   fun loginPresenter(): LoginPresenter
 
-  fun allJokesPresenter(): AllJokesPresenter
-
-  fun favoriteJokesPresenter(): FavoriteJokesPresenter
+  fun allBooksPresenter(): AllBooksPresenter
 
   fun profilePresenter(): ProfilePresenter
 
-  fun addJokePresenter(): AddJokePresenter
+  fun addBookPresenter(): AddBookPresenter
 
   fun welcomePresenter(): WelcomePresenter
 }

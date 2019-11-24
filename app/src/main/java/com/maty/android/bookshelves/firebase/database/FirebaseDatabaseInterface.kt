@@ -1,17 +1,17 @@
 package com.maty.android.bookshelves.firebase.database
 
-import com.maty.android.bookshelves.model.Joke
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.model.User
 
 interface FirebaseDatabaseInterface {
 
-  fun listenToJokes(onJokeAdded: (Joke) -> Unit)
+  fun listenToBooks(onBookAdded: (Book) -> Unit)
 
-  fun addNewJoke(joke: Joke, onResult: (Boolean) -> Unit)
+  fun addNewBook(book: Book, onResult: (Boolean) -> Unit)
 
-  fun getFavoriteJokes(userId: String, onResult: (List<Joke>) -> Unit)
+  fun getFavoriteBooks(userId: String, onResult: (List<Book>) -> Unit)
 
-  fun changeJokeFavoriteStatus(joke: Joke, userId: String)
+  fun changeBookFavoriteStatus(book: Book, userId: String)
 
   fun createUser(id: String, name: String, email: String)
 

@@ -25,12 +25,12 @@
         android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/addJoke"
+        android:id="@+id/addBook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:padding="16dp"
-        app:srcCompat="@drawable/ic_add_joke"/>
+        app:srcCompat="@drawable/ic_add_book"/>
   </FrameLayout>
 
   <android.support.v4.view.ViewPager

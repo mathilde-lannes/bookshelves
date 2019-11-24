@@ -6,7 +6,7 @@ interface ProfileView {
 
   fun showEmail(email: String)
 
-  fun showNumberOfJokes(jokesCount: Int)
+  fun showNumberOfBooks(booksCount: Int)
 
   fun openWelcome()
 }

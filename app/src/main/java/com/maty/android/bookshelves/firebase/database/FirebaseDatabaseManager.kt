@@ -5,7 +5,7 @@ import com.maty.android.bookshelves.model.*
 import javax.inject.Inject
 
 private const val KEY_USER = "user"
-private const val KEY_JOKE = "joke"
+private const val KEY_JOKE = "book"
 private const val KEY_FAVORITE = "favorite"
 
 class FirebaseDatabaseManager @Inject constructor(private val database: FirebaseDatabase) : FirebaseDatabaseInterface {
@@ -16,7 +16,7 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
     database.reference.child(KEY_USER).child(id).setValue(user)
   }
 
-  override fun listenToJokes(onJokeAdded: (Joke) -> Unit) {
+  override fun listenToBooks(onBookAdded: (Book) -> Unit) {
     database.reference.child(KEY_JOKE)
         .orderByKey()
         .addChildEventListener(object : ChildEventListener {
@@ -26,23 +26,23 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
           override fun onChildRemoved(p0: DataSnapshot?) = Unit
 
           override fun onChildAdded(snapshot: DataSnapshot?, p1: String?) {
-            snapshot?.getValue(JokeResponse::class.java)?.run {
+            snapshot?.getValue(BookResponse::class.java)?.run {
               if (isValid()) {
-                onJokeAdded(mapToJoke())
+                onBookAdded(mapToBook())
               }
             }
           }
         })
   }
 
-  override fun addNewJoke(joke: Joke, onResult: (Boolean) -> Unit) {
-    val newJokeReference = database.reference.child(KEY_JOKE).push()
-    val newJoke = joke.copy(id = newJokeReference.key)
+  override fun addNewBook(book: Book, onResult: (Boolean) -> Unit) {
+    val newBookReference = database.reference.child(KEY_JOKE).push()
+    val newBook = book.copy(id = newBookReference.key)
 
-    newJokeReference.setValue(newJoke).addOnCompleteListener { onResult(it.isSuccessful && it.isComplete) }
+    newBookReference.setValue(newBook).addOnCompleteListener { onResult(it.isSuccessful && it.isComplete) }
   }
 
-  override fun getFavoriteJokes(userId: String, onResult: (List<Joke>) -> Unit) {
+  override fun getFavoriteBooks(userId: String, onResult: (List<Book>) -> Unit) {
     database.reference
         .child(KEY_USER)
         .child(userId)
@@ -52,31 +52,31 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
 
           override fun onDataChange(snapshot: DataSnapshot?) {
             snapshot?.run {
-              val jokes = children.mapNotNull { it.getValue(JokeResponse::class.java) }
+              val books = children.mapNotNull { it.getValue(BookResponse::class.java) }
 
-              onResult(jokes.map(JokeResponse::mapToJoke))
+              onResult(books.map(BookResponse::mapToBook))
             }
           }
         })
   }
 
-  override fun changeJokeFavoriteStatus(joke: Joke, userId: String) {
+  override fun changeBookFavoriteStatus(book: Book, userId: String) {
     val reference = database.reference
         .child(KEY_USER)
         .child(userId)
         .child(KEY_FAVORITE)
-        .child(joke.id)
+        .child(book.id)
 
     reference.addListenerForSingleValueEvent(object : ValueEventListener {
       override fun onCancelled(error: DatabaseError?) {}
 
       override fun onDataChange(snapshot: DataSnapshot?) {
-        val oldJoke = snapshot?.getValue(JokeResponse::class.java)
+        val oldBook = snapshot?.getValue(BookResponse::class.java)
 
-        if (oldJoke!=null) {
+        if (oldBook!=null) {
           reference.setValue(null)
         } else {
-          reference.setValue(joke)
+          reference.setValue(book)
         }
       }
     })
@@ -91,13 +91,13 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
 
           override fun onDataChange(snapshot: DataSnapshot?) {
             val user = snapshot?.getValue(UserResponse::class.java)
-            val favoriteJokes = snapshot?.child(KEY_FAVORITE)?.children
-                ?.map { it?.getValue(JokeResponse::class.java) }
-                ?.mapNotNull { it?.mapToJoke() }
+            val favoriteBooks = snapshot?.child(KEY_FAVORITE)?.children
+                ?.map { it?.getValue(BookResponse::class.java) }
+                ?.mapNotNull { it?.mapToBook() }
                 ?: listOf()
 
 
-            user?.run { onResult(User(id, username, email, favoriteJokes)) }
+            user?.run { onResult(User(id, username, email, favoriteBooks)) }
           }
         })
   }

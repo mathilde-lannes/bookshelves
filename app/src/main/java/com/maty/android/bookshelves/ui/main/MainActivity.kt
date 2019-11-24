@@ -7,9 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.onPageChange
-import com.maty.android.bookshelves.ui.addJoke.AddJokeActivity
-import com.maty.android.bookshelves.ui.jokes.all.AllJokesFragment
-import com.maty.android.bookshelves.ui.jokes.favorite.FavoriteJokesFragment
+import com.maty.android.bookshelves.ui.addBook.AddBookActivity
+import com.maty.android.bookshelves.ui.books.all.AllBooksFragment
 import com.maty.android.bookshelves.ui.main.pager.MainPagerAdapter
 import com.maty.android.bookshelves.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 
   private fun initUi() {
     val adapter = MainPagerAdapter(supportFragmentManager)
-    adapter.setPages(listOf(AllJokesFragment(), FavoriteJokesFragment(), ProfileFragment()))
+    adapter.setPages(listOf(AllBooksFragment(), ProfileFragment()))
 
     mainPager.adapter = adapter
-    mainPager.offscreenPageLimit = 3
+    mainPager.offscreenPageLimit = 2
     bottomNavigation.setOnNavigationItemSelectedListener {
       switchNavigationTab(it.order)
       true
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity() {
       bottomNavigation.selectedItemId = item.itemId
     }
 
-    addJoke.onClick { startActivity(Intent(this, AddJokeActivity::class.java)) }
+    addBook.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
   }
 
   private fun switchNavigationTab(position: Int) = mainPager.setCurrentItem(position, true)

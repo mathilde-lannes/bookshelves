@@ -23,7 +23,7 @@ class ProfilePresenterImpl @Inject constructor(
 
       view.showUsername(it.username)
       view.showEmail(it.email)
-      view.showNumberOfJokes(it.favoriteJokes.count { it.authorId==userId })
+      view.showNumberOfBooks(it.favoriteBooks.count { it.authorId==userId })
     }
   }
 

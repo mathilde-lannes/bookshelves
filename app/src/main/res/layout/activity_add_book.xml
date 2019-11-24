@@ -6,23 +6,23 @@
     android:layout_height="match_parent">
 
   <EditText
-      android:id="@+id/jokeDescription"
+      android:id="@+id/bookDescription"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="16dp"
-      android:hint="@string/joke_hint"
+      android:hint="@string/book_hint"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>
 
   <Button
-      android:id="@+id/addJoke"
+      android:id="@+id/addBook"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_margin="16dp"
-      android:text="@string/add_joke_text"
+      android:text="@string/add_book_text"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/jokeDescription"/>
+      app:layout_constraintTop_toBottomOf="@id/bookDescription"/>
 
 </android.support.constraint.ConstraintLayout>

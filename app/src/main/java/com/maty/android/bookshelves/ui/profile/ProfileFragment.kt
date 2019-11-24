@@ -39,8 +39,8 @@ class ProfileFragment : Fragment(), ProfileView {
     userEmail.text = getString(R.string.email_text, email)
   }
 
-  override fun showNumberOfJokes(jokesCount: Int) {
-    numberOfJokes.text = getString(R.string.number_of_jokes_text, jokesCount)
+  override fun showNumberOfBooks(booksCount: Int) {
+    numberOfBooks.text = getString(R.string.number_of_books_text, booksCount)
   }
 
   override fun openWelcome() {

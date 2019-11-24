@@ -30,7 +30,7 @@
         android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
     <activity
-        android:name="com.maty.android.bookshelves.ui.addJoke.AddJokeActivity"
+        android:name="com.maty.android.bookshelves.ui.addBook.AddBookActivity"
         android:screenOrientation="portrait"
         android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 

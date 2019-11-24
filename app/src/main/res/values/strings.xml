@@ -10,19 +10,19 @@
   <string name="username_error">Username needs to be at least 6 characters</string>
   <string name="repeat_password_error">Passwords do not match</string>
   <string name="log_in_button">Log in</string>
-  <string name="all_jokes_title">All jokes</string>
-  <string name="favorite_jokes_title">Favorite jokes</string>
+  <string name="all_books_title">All books</string>
+  <string name="favorite_books_title">Favorite books</string>
   <string name="my_profile_title">My profile</string>
   <string name="log_out_button">Log out</string>
-  <string name="number_of_jokes_text">Number of favorite jokes: %d</string>
+  <string name="number_of_books_text">Number of favorite books: %d</string>
   <string name="email_text">User email: %s</string>
   <string name="username_text">Username: %s</string>
-  <string name="welcome_description">In order to join other Jokers, you first need to sign up :]</string>
+  <string name="welcome_description">In order to join other Bookrs, you first need to sign up :]</string>
   <string name="no_items_text">There seems to be no items :[</string>
   <string name="error_title">Oops</string>
   <string name="error_message">Something went wrong! Please try again.</string>
   <string name="general_positive_button">OK</string>
-  <string name="joke_hint">Enter your joke</string>
-  <string name="add_joke_text">Add joke</string>
-  <string name="joke_error">Each joke must have at least 10 characters</string>
+  <string name="book_hint">Enter your book</string>
+  <string name="add_book_text">Add book</string>
+  <string name="book_error">Each book must have at least 10 characters</string>
 </resources>

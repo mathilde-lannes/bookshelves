@@ -44,7 +44,7 @@
           tools:text="User email: email@mail.com"/>
 
       <TextView
-          android:id="@+id/numberOfJokes"
+          android:id="@+id/numberOfBooks"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="16dp"
@@ -53,7 +53,7 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@id/userEmail"
-          tools:text="Number of jokes: 42"/>
+          tools:text="Number of books: 42"/>
 
     </android.support.constraint.ConstraintLayout>
   </android.support.v7.widget.CardView>
