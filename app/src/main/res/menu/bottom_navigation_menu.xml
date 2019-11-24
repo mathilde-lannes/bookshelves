@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/allJokes"
+      android:icon="@drawable/ic_all_jokes"
+      android:orderInCategory="0"
+      android:title="@string/all_jokes_title"
+      app:showAsAction="ifRoom"/>
+
+  <item
+      android:id="@+id/favoriteJokes"
+      android:icon="@drawable/ic_favorite_filled"
+      android:orderInCategory="1"
+      android:title="@string/favorite_jokes_title"
+      app:showAsAction="ifRoom"/>
+
+  <item
+      android:id="@+id/myProfile"
+      android:icon="@drawable/ic_profile"
+      android:orderInCategory="2"
+      android:title="@string/my_profile_title"
+      app:showAsAction="ifRoom"/>
+</menu>
