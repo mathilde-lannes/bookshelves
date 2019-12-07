@@ -5,34 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <FrameLayout
-      android:id="@+id/toolbar"
-      android:layout_width="0dp"
-      android:layout_height="?attr/actionBarSize"
-      android:background="@color/colorPrimary"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start|center_vertical"
-        android:layout_margin="16dp"
-        android:text="@string/app_name"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
-
-    <ImageView
-        android:id="@+id/addBook"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|center_vertical"
-        android:padding="16dp"
-        app:srcCompat="@drawable/ic_add_book"/>
-  </FrameLayout>
-
   <android.support.v4.view.ViewPager
       android:id="@+id/mainPager"
       android:layout_width="0dp"
@@ -40,7 +12,7 @@
       app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+      app:layout_constraintTop_toTopOf="parent"/>
 
   <android.support.design.widget.BottomNavigationView
       android:id="@+id/bottomNavigation"

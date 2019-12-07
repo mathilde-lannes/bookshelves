@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
       bottomNavigation.selectedItemId = item.itemId
     }
 
-    addBook.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
+    // addBook.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
   }
 
   private fun switchNavigationTab(position: Int) = mainPager.setCurrentItem(position, true)

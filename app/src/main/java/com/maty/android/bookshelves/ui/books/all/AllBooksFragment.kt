@@ -35,8 +35,7 @@ class AllBooksFragment : Fragment(), AllBooksView {
   }
 
   private fun initUi() {
-    books.layoutManager = LinearLayoutManager(activity)
-    books.setHasFixedSize(true)
+    books.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
     books.adapter = adapter
   }
 

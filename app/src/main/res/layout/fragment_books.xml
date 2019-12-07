@@ -5,10 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/books"
+  <TextView
+      android:id="@+id/main_title"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="wrap_content"
+      android:text="@string/book_shelves"
+      style="@style/LabelTheme"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+  <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintTop_toBottomOf="@id/main_title">
+
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/books"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"/>
+
+  </FrameLayout>
 
   <TextView
       android:id="@+id/noItems"
