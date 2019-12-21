@@ -1,7 +1,7 @@
 package com.maty.android.bookshelves.ui.addBook
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.addBookPresenter
 import com.maty.android.bookshelves.common.onClick

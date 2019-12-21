@@ -9,12 +9,6 @@ import dagger.Module
 abstract class PresentationModule {
 
   @Binds
-  abstract fun loginPresenter(loginPresenter: LoginPresenterImpl): LoginPresenter
-
-  @Binds
-  abstract fun registerPresenter(registerPresenter: RegisterPresenterImpl): RegisterPresenter
-
-  @Binds
   abstract fun allBooksPresenter(allBooksPresenterImpl: AllBooksPresenterImpl): AllBooksPresenter
 
   @Binds

@@ -9,5 +9,7 @@ interface AllBooksPresenter : BasePresenter<AllBooksView> {
 
   fun getAllBooks()
 
+  fun getGoodreadsBookByISBN(isbn: String)
+
   fun onFavoriteButtonTapped(book: Book)
 }

@@ -5,4 +5,10 @@ import com.maty.android.bookshelves.ui.welcome.WelcomeView
 interface WelcomePresenter : BasePresenter<WelcomeView> {
 
   fun viewReady()
+
+  fun onGoodreadsTapped()
+
+  fun logIn()
+
+  fun afterGoodreadsAuth()
 }

@@ -1,6 +1,6 @@
 package com.maty.android.bookshelves.ui.books.all.list
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick

@@ -1,8 +1,8 @@
 package com.maty.android.bookshelves.ui.main.pager
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 
 class MainPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
 

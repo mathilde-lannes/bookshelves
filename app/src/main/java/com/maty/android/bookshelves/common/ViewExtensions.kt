@@ -1,6 +1,6 @@
 package com.maty.android.bookshelves.common
 
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View

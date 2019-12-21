@@ -3,8 +3,11 @@ package com.maty.android.bookshelves.ui.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.intmainreturn00.grapi.grapi
 import com.maty.android.bookshelves.R
+import com.maty.android.bookshelves.allBooksPresenter
+import com.maty.android.bookshelves.common.ScopedAppActivity
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.onPageChange
 import com.maty.android.bookshelves.ui.addBook.AddBookActivity
@@ -12,6 +15,8 @@ import com.maty.android.bookshelves.ui.books.all.AllBooksFragment
 import com.maty.android.bookshelves.ui.main.pager.MainPagerAdapter
 import com.maty.android.bookshelves.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.browse
 
 class MainActivity : AppCompatActivity() {
 

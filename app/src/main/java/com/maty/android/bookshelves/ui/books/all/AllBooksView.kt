@@ -8,6 +8,8 @@ interface AllBooksView {
 
   fun hideNoDataDescription()
 
+  fun setGoodreadsTest(test: String)
+
   fun setFavoriteBooksIds(favoriteBooksIds: List<String>)
 
   fun addBook(book: Book)
