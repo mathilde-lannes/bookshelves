@@ -1,11 +1,15 @@
 package com.maty.android.bookshelves.presentation.implementation
 
+import android.app.Activity
+import com.google.zxing.integration.android.IntentIntegrator
+import com.intmainreturn00.grapi.grapi
 import com.maty.android.bookshelves.common.isValidBook
 import com.maty.android.bookshelves.firebase.authentication.FirebaseAuthenticationInterface
 import com.maty.android.bookshelves.firebase.database.FirebaseDatabaseInterface
-import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.presentation.AddBookPresenter
 import com.maty.android.bookshelves.ui.addBook.AddBookView
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddBookPresenterImpl @Inject constructor(
@@ -21,9 +25,15 @@ class AddBookPresenterImpl @Inject constructor(
     this.view = view
   }
 
-  override fun addBookTapped() {
-    if (isValidBook(bookText)) {
-      val book = Book("", authenticationInterface.getUserName(), authenticationInterface.getUserId(), bookText)
+  override fun scanBarcode(activity: Activity) {
+    run {
+      IntentIntegrator(activity).initiateScan()
+    }
+  }
+
+  override fun getGoodreadsBookByISBN(isbn: String) {
+    GlobalScope.launch {
+      val book = grapi.getBookByISBN(isbn)
 
       databaseInterface.addNewBook(book) { onAddBookResult(it) }
     }

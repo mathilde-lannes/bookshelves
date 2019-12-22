@@ -1,29 +1,18 @@
 <resources>
   <string name="app_name">bookshelves</string>
-  <string name="password_error">Password must have  at least 6 characters</string>
-  <string name="email_error">Invalid email</string>
-  <string name="email_hint">E-mail</string>
-  <string name="password_hint">Password</string>
-  <string name="username_hint">Username</string>
-  <string name="register_button">Sign up</string>
-  <string name="repeat_password_hint">Repeat password</string>
-  <string name="username_error">Username needs to be at least 6 characters</string>
-  <string name="repeat_password_error">Passwords do not match</string>
-  <string name="log_in_button">Log in to Goodreads</string>
+    <string name="log_in_button">Log in to Goodreads</string>
   <string name="all_books_title">All books</string>
-  <string name="favorite_books_title">Favorite books</string>
-  <string name="my_profile_title">My profile</string>
+    <string name="my_profile_title">My profile</string>
   <string name="log_out_button">Log out</string>
   <string name="number_of_books_text">Number of favorite books: %d</string>
   <string name="email_text">User email: %s</string>
   <string name="username_text">Username: %s</string>
-  <string name="welcome_description">In order to join other Bookrs, you first need to sign up :]</string>
-  <string name="no_items_text">There seems to be no items :[</string>
+    <string name="no_items_text">There seems to be no items :[</string>
   <string name="error_title">Oops</string>
   <string name="error_message">Something went wrong! Please try again.</string>
   <string name="general_positive_button">OK</string>
   <string name="book_hint">Enter your book</string>
   <string name="add_book_text">Add book</string>
-  <string name="book_error">Each book must have at least 10 characters</string>
+  <string name="book_error">Scan failed</string>
   <string name="book_shelves">Book shelves</string>
 </resources>

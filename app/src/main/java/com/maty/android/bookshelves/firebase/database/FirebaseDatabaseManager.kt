@@ -1,7 +1,11 @@
 package com.maty.android.bookshelves.firebase.database
 
 import com.google.firebase.database.*
-import com.maty.android.bookshelves.model.*
+import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.BookResponse
+import com.maty.android.bookshelves.model.User
+import com.maty.android.bookshelves.model.UserResponse
+import com.maty.android.bookshelves.model.mapToBook
 import javax.inject.Inject
 
 private const val KEY_USER = "user"
@@ -26,11 +30,9 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
           override fun onChildRemoved(p0: DataSnapshot?) = Unit
 
           override fun onChildAdded(snapshot: DataSnapshot?, p1: String?) {
-            snapshot?.getValue(BookResponse::class.java)?.run {
-              if (isValid()) {
-                onBookAdded(mapToBook())
+              snapshot?.getValue(BookResponse::class.java)?.run {
+                      onBookAdded(this.mapToBook())
               }
-            }
           }
         })
   }

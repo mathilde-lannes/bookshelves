@@ -1,7 +1,10 @@
 package com.maty.android.bookshelves.ui.addBook
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.addBookPresenter
 import com.maty.android.bookshelves.common.onClick
@@ -21,9 +24,25 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     initUi()
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+    val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+
+    if(result != null){
+
+      if(result.contents != null){
+        presenter.getGoodreadsBookByISBN(result.contents)
+      } else {
+        showBookError()
+      }
+    } else {
+      super.onActivityResult(requestCode, resultCode, data)
+    }
+  }
+
   private fun initUi() {
     bookDescription.onTextChanged { presenter.onBookTextChanged(it) }
-    addBook.onClick { presenter.addBookTapped() }
+    addBook.onClick { presenter.scanBarcode(this) }
   }
 
   override fun showBookError() {

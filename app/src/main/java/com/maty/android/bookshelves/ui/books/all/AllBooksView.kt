@@ -1,6 +1,7 @@
 package com.maty.android.bookshelves.ui.books.all
 
-import com.maty.android.bookshelves.model.Book
+import com.intmainreturn00.grapi.Book
+
 
 interface AllBooksView {
 

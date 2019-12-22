@@ -6,19 +6,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.intmainreturn00.grapi.grapi
+import com.intmainreturn00.grapi.Book
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.allBooksPresenter
-import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.all.list.BookAdapter
 import kotlinx.android.synthetic.main.fragment_books.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 class AllBooksFragment : Fragment(), AllBooksView {
 
   private val presenter by lazy { allBooksPresenter() }
-  private val adapter by lazy { BookAdapter(presenter::onFavoriteButtonTapped) }
+  private val adapter by lazy { BookAdapter() }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.fragment_books, container, false)
@@ -30,8 +27,6 @@ class AllBooksFragment : Fragment(), AllBooksView {
     presenter.setView(this)
 
     presenter.viewReady()
-
-    presenter.getGoodreadsBookByISBN("2841728641")
   }
 
   override fun addBook(book: Book) {

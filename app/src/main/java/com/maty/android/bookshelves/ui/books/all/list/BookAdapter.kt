@@ -3,12 +3,10 @@ package com.maty.android.bookshelves.ui.books.all.list
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.intmainreturn00.grapi.Book
 import com.maty.android.bookshelves.R
-import com.maty.android.bookshelves.model.Book
 
-class BookAdapter(
-    private val onFavoriteClickHandler: (Book) -> Unit
-) : RecyclerView.Adapter<BookHolder>() {
+class BookAdapter() : RecyclerView.Adapter<BookHolder>() {
 
   private val items = mutableListOf<Book>()
   private val favoriteBooksIds = mutableListOf<String>()
@@ -28,7 +26,7 @@ class BookAdapter(
   }
 
   override fun onBindViewHolder(holder: BookHolder, position: Int) {
-    val book = items[position].apply { isFavorite = id in favoriteBooksIds }
+    val book = items[position]
 
     holder.displayData(book)
   }

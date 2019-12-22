@@ -1,6 +1,6 @@
 package com.maty.android.bookshelves.firebase.database
 
-import com.maty.android.bookshelves.model.Book
+import com.intmainreturn00.grapi.Book
 import com.maty.android.bookshelves.model.User
 
 interface FirebaseDatabaseInterface {
