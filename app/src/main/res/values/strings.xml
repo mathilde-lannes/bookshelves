@@ -9,7 +9,7 @@
   <string name="repeat_password_hint">Repeat password</string>
   <string name="username_error">Username needs to be at least 6 characters</string>
   <string name="repeat_password_error">Passwords do not match</string>
-  <string name="log_in_button">Log in</string>
+  <string name="log_in_button">Log in to Goodreads</string>
   <string name="all_books_title">All books</string>
   <string name="favorite_books_title">Favorite books</string>
   <string name="my_profile_title">My profile</string>
@@ -25,5 +25,5 @@
   <string name="book_hint">Enter your book</string>
   <string name="add_book_text">Add book</string>
   <string name="book_error">Each book must have at least 10 characters</string>
-    <string name="book_shelves">Book shelves</string>
+  <string name="book_shelves">Book shelves</string>
 </resources>
