@@ -5,11 +5,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.addBookPresenter
 import com.maty.android.bookshelves.common.onClick
-import com.maty.android.bookshelves.common.onTextChanged
 import com.maty.android.bookshelves.common.showGeneralError
+import com.maty.android.bookshelves.ui.addBook.suggestions.SuggestionAdapter
 import kotlinx.android.synthetic.main.activity_add_book.*
 
 class AddBookActivity : AppCompatActivity(), AddBookView {
@@ -41,16 +42,24 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
   }
 
   private fun initUi() {
-    bookDescription.onTextChanged { presenter.onBookTextChanged(it) }
+    //autocomplete.onTextChanged { presenter.onBookTextChanged(it) }
     addBook.onClick { presenter.scanBarcode(this) }
+
+    val adapter = SuggestionAdapter(this, R.layout.item_suggestion, listOf())
+    autocomplete.setAdapter(adapter)
+
+    autocomplete.setOnItemClickListener { parent, _, position, id ->
+      val selectedSuggestion = parent.adapter.getItem(position) as SearchResult?
+      autocomplete.setText(selectedSuggestion?.bookTitle)
+    }
   }
 
   override fun showBookError() {
-    bookDescription.error = getString(R.string.book_error)
+    autocomplete.error = getString(R.string.book_error)
   }
 
   override fun removeBookError() {
-    bookDescription.error = null
+    autocomplete.error = null
   }
 
   override fun onBookAdded() = finish()

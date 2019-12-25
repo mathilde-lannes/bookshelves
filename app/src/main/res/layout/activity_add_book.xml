@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <EditText
-      android:id="@+id/bookDescription"
-      android:layout_width="0dp"
+  <AutoCompleteTextView
+      android:id="@+id/autocomplete"
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:completionThreshold="3"
       android:layout_margin="16dp"
-      android:hint="@string/book_hint"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="parent"
+      android:hint="La croisée des mondes..." />
 
   <Button
       android:id="@+id/addBook"
@@ -23,6 +24,6 @@
       android:text="@string/add_book_text"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/bookDescription"/>
+      app:layout_constraintTop_toBottomOf="@id/autocomplete"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
