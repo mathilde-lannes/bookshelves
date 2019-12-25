@@ -15,4 +15,10 @@
   <string name="add_book_text">Add book</string>
   <string name="book_error">Scan failed</string>
   <string name="book_shelves">Book shelves</string>
+
+  <!--Add book activity -->
+  <string name="add_book_title">Search for a book to add to the bookshelves</string>
+  <string name="scan_barcode">Scan a barcode</string>
+  <string name="book_search_placeholder">Type a book name or author…</string>
+  <string name="or">or</string>
 </resources>
