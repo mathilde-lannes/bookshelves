@@ -7,7 +7,11 @@ interface FirebaseDatabaseInterface {
 
   fun listenToBooks(onBookAdded: (Book) -> Unit)
 
-  fun addNewBook(book: Book, onResult: (Boolean) -> Unit)
+  fun addNewBook(book: Book, onResult: (Boolean, String) -> Unit)
+
+  fun addBookToRead(book: Book, onResult: (Boolean, String) -> Unit)
+
+  fun addBookToBuy(book: Book, onResult: (Boolean, String) -> Unit)
 
   fun getFavoriteBooks(userId: String, onResult: (List<Book>) -> Unit)
 
@@ -16,4 +20,6 @@ interface FirebaseDatabaseInterface {
   fun createUser(id: String, name: String, email: String)
 
   fun getProfile(id: String, onResult: (User) -> Unit)
+
+  fun getBookById(bookId: String, onResult: (Book) -> Unit)
 }

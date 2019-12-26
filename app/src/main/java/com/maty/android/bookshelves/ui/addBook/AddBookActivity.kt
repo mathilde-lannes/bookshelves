@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
+import com.intmainreturn00.grapi.Book
 import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.addBookPresenter
@@ -14,6 +15,10 @@ import com.maty.android.bookshelves.ui.addBook.suggestions.SuggestionAdapter
 import kotlinx.android.synthetic.main.activity_add_book.*
 
 class AddBookActivity : AppCompatActivity(), AddBookView {
+
+  override fun showBook(book: Book) {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 
   private val presenter by lazy { addBookPresenter() }
 
@@ -42,15 +47,18 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
   }
 
   private fun initUi() {
-    //autocomplete.onTextChanged { presenter.onBookTextChanged(it) }
     addBookButton.onClick { presenter.scanBarcode(this) }
 
     val adapter = SuggestionAdapter(this, R.layout.item_suggestion, listOf())
     autocomplete.setAdapter(adapter)
 
-    autocomplete.setOnItemClickListener { parent, _, position, id ->
+    autocomplete.setOnItemClickListener { parent, _, position, _ ->
       val selectedSuggestion = parent.adapter.getItem(position) as SearchResult?
       autocomplete.setText(selectedSuggestion?.bookTitle)
+      if (selectedSuggestion != null)
+        presenter.onSuggestionClicked(selectedSuggestion)
+      else
+        showBookError()
     }
   }
 
@@ -62,7 +70,11 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     autocomplete.error = null
   }
 
-  override fun onBookAdded() = finish()
+  override fun onBookAdded(bookId: String) {
+    val intent = Intent(this, BookDetailsActivity::class.java)
+    intent.putExtra("book", bookId)
+    startActivity(intent)
+  }
 
   override fun showAddBookError() = showGeneralError(this)
 }

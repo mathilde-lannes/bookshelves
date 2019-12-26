@@ -9,7 +9,9 @@ import com.maty.android.bookshelves.model.mapToBook
 import javax.inject.Inject
 
 private const val KEY_USER = "user"
-private const val KEY_JOKE = "book"
+private const val KEY_BOOK = "book"
+private const val KEY_TO_READ = "read"
+private const val KEY_TO_BUY = "buy"
 private const val KEY_FAVORITE = "favorite"
 
 class FirebaseDatabaseManager @Inject constructor(private val database: FirebaseDatabase) : FirebaseDatabaseInterface {
@@ -21,7 +23,7 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
   }
 
   override fun listenToBooks(onBookAdded: (Book) -> Unit) {
-    database.reference.child(KEY_JOKE)
+    database.reference.child(KEY_BOOK)
         .orderByKey()
         .addChildEventListener(object : ChildEventListener {
           override fun onCancelled(p0: DatabaseError?) = Unit
@@ -37,12 +39,39 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
         })
   }
 
-  override fun addNewBook(book: Book, onResult: (Boolean) -> Unit) {
-    val newBookReference = database.reference.child(KEY_JOKE).push()
-    val newBook = book.copy(id = newBookReference.key)
+    override fun getBookById(bookId: String, onResult: (Book) -> Unit) {
+        database.reference
+            .child(KEY_BOOK)
+            .child(bookId)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(error: DatabaseError?) = Unit
 
-    newBookReference.setValue(newBook).addOnCompleteListener { onResult(it.isSuccessful && it.isComplete) }
+                override fun onDataChange(snapshot: DataSnapshot?) {
+                    val book = snapshot?.getValue(BookResponse::class.java)
+
+                    book?.run { onResult(mapToBook()) }
+                }
+            })
+    }
+
+    private fun addBook(book: Book, collection: String, onResult: (Boolean, String) -> Unit) {
+        val newBookReference = database.reference.child(collection).child(book.id)
+        val newBook = book.copy(id = newBookReference.key)
+
+        newBookReference.setValue(newBook).addOnCompleteListener { onResult(it.isSuccessful && it.isComplete, newBookReference.key) }
   }
+
+    override fun addNewBook(book: Book, onResult: (Boolean, String) -> Unit) {
+        addBook(book, KEY_BOOK, onResult)
+  }
+
+    override fun addBookToRead(book: Book, onResult: (Boolean, String) -> Unit) {
+        addBook(book, KEY_TO_READ, onResult)
+    }
+
+    override fun addBookToBuy(book: Book, onResult: (Boolean, String) -> Unit) {
+        addBook(book, KEY_TO_BUY, onResult)
+    }
 
   override fun getFavoriteBooks(userId: String, onResult: (List<Book>) -> Unit) {
     database.reference

@@ -21,4 +21,6 @@
   <string name="scan_barcode">Scan a barcode</string>
   <string name="book_search_placeholder">Type a book name or author…</string>
   <string name="or">or</string>
+    <string name="to_read">to read</string>
+  <string name="to_buy">to buy</string>
 </resources>
