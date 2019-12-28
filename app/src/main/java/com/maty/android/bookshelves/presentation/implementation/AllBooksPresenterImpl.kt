@@ -1,6 +1,6 @@
 package com.maty.android.bookshelves.presentation.implementation
 
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.firebase.authentication.FirebaseAuthenticationInterface
 import com.maty.android.bookshelves.firebase.database.FirebaseDatabaseInterface
 import com.maty.android.bookshelves.presentation.AllBooksPresenter
@@ -24,6 +24,9 @@ class AllBooksPresenterImpl @Inject constructor(
 
   private fun onFavoriteBooksResult(favoriteBooks: List<Book>) = view.setFavoriteBooksIds(favoriteBooks.map { it.id })
 
-  override fun getAllBooks() = databaseInterface.listenToBooks { view.addBook(it) }
+  override fun getAllBooks() {
+    databaseInterface.listenToBooksToRead { view.addBook(it) }
+//    databaseInterface.listenToBooksToBuy { view.addBook(it) }
+  }
 }
 

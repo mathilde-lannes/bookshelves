@@ -34,32 +34,73 @@
         android:padding="30dp"
         app:layout_constraintTop_toBottomOf="@id/bookAuthor"/>
 
-    <Button
-        android:id="@+id/toReadButton"
-        android:layout_width="0dp"
+    <RelativeLayout
+        android:id="@+id/defaultAction"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.4"
-        android:drawableTint="@color/colorPrimary"
-        android:drawableTop="@drawable/books"
-        android:text="@string/to_read"
-        style="@style/ButtonWithIconTheme"
-        android:layout_marginBottom="30dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-    />
+        android:visibility="gone">
 
-    <Button
-        android:id="@+id/toBuyButton"
-        android:layout_width="0dp"
+        <Button
+            android:id="@+id/toReadButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableTop="@drawable/books"
+            android:text="@string/to_read"
+            style="@style/ButtonWithIconTheme"
+            />
+
+        <Button
+            android:id="@+id/toBuyButton"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableTop="@drawable/shopping_cart"
+            android:text="@string/to_buy"
+            style="@style/ButtonWithIconTheme"
+            android:layout_toEndOf="@id/toReadButton"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/toReadAction"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.4"
-        android:drawableTint="@color/colorPrimary"
-        android:drawableTop="@drawable/shopping_cart"
-        android:text="@string/to_buy"
-        style="@style/ButtonWithIconTheme"
-        android:layout_marginBottom="30dp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/toReadButton"
-    />
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/startReadingButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableTop="@drawable/books"
+            android:text="@string/start_reading"
+            style="@style/ButtonWithIconTheme" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/toBuyAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/moveToReadButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableTop="@drawable/books"
+            android:text="@string/move_to_read"
+            style="@style/ButtonWithIconTheme" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

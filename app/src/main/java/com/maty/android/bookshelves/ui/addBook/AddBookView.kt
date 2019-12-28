@@ -1,16 +1,14 @@
 package com.maty.android.bookshelves.ui.addBook
 
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 
 interface AddBookView {
 
-  fun onBookAdded(bookId: String)
+  fun onBookAdded(book: Book)
 
   fun showAddBookError()
 
   fun showBookError()
 
   fun removeBookError()
-
-  fun showBook(book: Book)
 }

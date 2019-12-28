@@ -1,17 +1,19 @@
 package com.maty.android.bookshelves.firebase.database
 
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.model.User
 
 interface FirebaseDatabaseInterface {
 
-  fun listenToBooks(onBookAdded: (Book) -> Unit)
+  fun listenToBooksToRead(onBookAdded: (Book) -> Unit)
 
-  fun addNewBook(book: Book, onResult: (Boolean, String) -> Unit)
+  fun listenToBooksToBuy(onBookAdded: (Book) -> Unit)
 
-  fun addBookToRead(book: Book, onResult: (Boolean, String) -> Unit)
+  fun addNewBook(book: Book, onResult: (Boolean) -> Unit)
 
-  fun addBookToBuy(book: Book, onResult: (Boolean, String) -> Unit)
+  fun addBookToRead(book: Book, onResult: (Boolean) -> Unit)
+
+  fun addBookToBuy(book: Book, onResult: (Boolean) -> Unit)
 
   fun getFavoriteBooks(userId: String, onResult: (List<Book>) -> Unit)
 
@@ -22,4 +24,8 @@ interface FirebaseDatabaseInterface {
   fun getProfile(id: String, onResult: (User) -> Unit)
 
   fun getBookById(bookId: String, onResult: (Book) -> Unit)
+
+  fun listenToBooksCurrentlyReading(onBookAdded: (Book) -> Unit)
+
+  fun addBookCurrentlyReading(book: Book, onResult: (Boolean) -> Unit)
 }

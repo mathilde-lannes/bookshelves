@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.allBooksPresenter
 import com.maty.android.bookshelves.ui.books.all.list.BookAdapter
@@ -45,10 +45,6 @@ class AllBooksFragment : Fragment(), AllBooksView {
 
   override fun hideNoDataDescription() {
     noItems.visibility = View.GONE
-  }
-
-  override fun setGoodreadsTest(test: String) {
-    testGoodreads.text = test
   }
 
   override fun setFavoriteBooksIds(favoriteBooksIds: List<String>) = adapter.setFavoriteBooksIds(favoriteBooksIds)

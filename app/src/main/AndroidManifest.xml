@@ -38,7 +38,7 @@
         android:name="com.maty.android.bookshelves.ui.main.MainActivity"
         android:screenOrientation="portrait"
         android:theme="@style/MainTheme"/>
-      <activity android:name=".ui.addBook.BookDetailsActivity" />
+      <activity android:name=".ui.books.detail.BookDetailsActivity" />
   </application>
 
 </manifest>

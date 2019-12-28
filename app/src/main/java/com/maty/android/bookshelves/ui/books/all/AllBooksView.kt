@@ -1,6 +1,6 @@
 package com.maty.android.bookshelves.ui.books.all
 
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 
 
 interface AllBooksView {
@@ -8,8 +8,6 @@ interface AllBooksView {
   fun showNoDataDescription()
 
   fun hideNoDataDescription()
-
-  fun setGoodreadsTest(test: String)
 
   fun setFavoriteBooksIds(favoriteBooksIds: List<String>)
 

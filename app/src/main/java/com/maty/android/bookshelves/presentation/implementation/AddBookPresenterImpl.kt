@@ -2,11 +2,11 @@ package com.maty.android.bookshelves.presentation.implementation
 
 import android.app.Activity
 import com.google.zxing.integration.android.IntentIntegrator
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 import com.intmainreturn00.grapi.SearchResult
 import com.intmainreturn00.grapi.grapi
-import com.maty.android.bookshelves.firebase.authentication.FirebaseAuthenticationInterface
 import com.maty.android.bookshelves.firebase.database.FirebaseDatabaseInterface
+import com.maty.android.bookshelves.model.mapToBook
 import com.maty.android.bookshelves.presentation.AddBookPresenter
 import com.maty.android.bookshelves.ui.addBook.AddBookView
 import kotlinx.coroutines.GlobalScope
@@ -14,7 +14,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddBookPresenterImpl @Inject constructor(
-    private val authenticationInterface: FirebaseAuthenticationInterface,
     private val databaseInterface: FirebaseDatabaseInterface
 ) : AddBookPresenter {
 
@@ -32,39 +31,27 @@ class AddBookPresenterImpl @Inject constructor(
 
   override fun getGoodreadsBookByISBN(isbn: String) {
     GlobalScope.launch {
-      val book = grapi.getBookByISBN(isbn)
+      val book = grapi.getBookByISBN(isbn).mapToBook()
       onNewBook(book)
     }
   }
 
   override fun onNewBook(book: Book) {
-    databaseInterface.addNewBook(book) { isSuccessful, bookId -> onAddBookResult(isSuccessful, bookId) }
+    databaseInterface.addNewBook(book) { onAddBookResult(it, book) }
   }
 
   override fun onSuggestionClicked(searchResult: SearchResult) {
     GlobalScope.launch {
-      val book = grapi.getBookByGRID(searchResult.bookId)
+      val book = grapi.getBookByGRID(searchResult.bookId).mapToBook()
       onNewBook(book)
     }
   }
 
-  private fun onAddBookResult(isSuccessful: Boolean, bookId: String) {
+  private fun onAddBookResult(isSuccessful: Boolean, book: Book) {
     if (isSuccessful) {
-      view.onBookAdded(bookId)
+      view.onBookAdded(book)
     } else {
       view.showAddBookError()
     }
-  }
-
-  override fun addToReadBook(book: Book) {
-    databaseInterface.addBookToRead(book) { isSuccessful, bookId -> onAddBookResult(isSuccessful, bookId) }
-  }
-
-  override fun addToBuyBook(book: Book) {
-    databaseInterface.addBookToBuy(book) { isSuccessful, bookId -> onAddBookResult(isSuccessful, bookId) }
-  }
-
-  override fun getBookById(bookId: String) {
-    databaseInterface.getBookById(bookId) { view.showBook(it)}
   }
 }

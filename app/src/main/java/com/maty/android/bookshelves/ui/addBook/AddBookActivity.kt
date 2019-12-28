@@ -5,20 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.addBookPresenter
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
 import com.maty.android.bookshelves.ui.addBook.suggestions.SuggestionAdapter
+import com.maty.android.bookshelves.ui.books.detail.BookDetailsActivity
 import kotlinx.android.synthetic.main.activity_add_book.*
 
 class AddBookActivity : AppCompatActivity(), AddBookView {
-
-  override fun showBook(book: Book) {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-  }
 
   private val presenter by lazy { addBookPresenter() }
 
@@ -70,9 +67,9 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     autocomplete.error = null
   }
 
-  override fun onBookAdded(bookId: String) {
+  override fun onBookAdded(book: Book) {
     val intent = Intent(this, BookDetailsActivity::class.java)
-    intent.putExtra("book", bookId)
+    intent.putExtra("book", book)
     startActivity(intent)
   }
 

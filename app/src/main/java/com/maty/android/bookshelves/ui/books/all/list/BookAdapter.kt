@@ -3,7 +3,7 @@ package com.maty.android.bookshelves.ui.books.all.list
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.intmainreturn00.grapi.Book
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.R
 
 class BookAdapter() : RecyclerView.Adapter<BookHolder>() {
