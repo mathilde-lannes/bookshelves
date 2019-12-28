@@ -1,8 +1,10 @@
 package com.maty.android.bookshelves.ui.addBook
 
+import com.maty.android.bookshelves.model.Book
+
 interface AddBookView {
 
-  fun onBookAdded()
+  fun onBookAdded(book: Book)
 
   fun showAddBookError()
 

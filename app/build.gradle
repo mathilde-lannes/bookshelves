@@ -32,6 +32,10 @@ android {
     kapt {
         generateStubs = true
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 ext {
@@ -67,6 +71,13 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+
+    //barcode scanner
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
+    //load images
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'

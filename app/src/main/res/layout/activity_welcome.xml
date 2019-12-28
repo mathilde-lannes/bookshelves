@@ -8,7 +8,6 @@
     tools:context="com.maty.android.bookshelves.ui.welcome.WelcomeActivity">
 
   <ImageView
-      android:id="@+id/illustration"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
       app:layout_constraintHeight_percent="0.7"
@@ -32,11 +31,8 @@
       android:id="@+id/goodreads"
       android:layout_width="0dp"
       android:layout_height="56dp"
-      android:textColor="@color/white"
-      android:background="@color/colorAccent"
-      android:gravity="center"
+      style="@style/ButtonTheme"
       android:text="@string/log_in_button"
-      android:layout_marginHorizontal="32dp"
       android:layout_marginBottom="50dp"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"

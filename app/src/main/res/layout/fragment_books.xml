@@ -9,7 +9,7 @@
       android:id="@+id/main_title"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="@string/book_shelves"
+      android:text="@string/books_to_read"
       style="@style/LabelTheme"
       app:layout_constraintTop_toTopOf="parent"/>
 
@@ -22,12 +22,6 @@
           android:id="@+id/books"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>
-
-      <TextView
-          android:id="@+id/testGoodreads"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          />
 
   </FrameLayout>
 

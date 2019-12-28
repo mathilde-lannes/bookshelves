@@ -7,7 +7,6 @@
     android:layout_height="match_parent">
 
   <androidx.cardview.widget.CardView
-      android:id="@+id/profileDetails"
       android:layout_width="0dp"
       android:layout_height="124dp"
       android:layout_margin="32dp"

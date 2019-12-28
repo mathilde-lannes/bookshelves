@@ -16,4 +16,24 @@
         <item name="android:paddingBottom">10sp</item>
         <item name="android:paddingStart">10sp</item>
     </style>
+
+    <style name="ButtonTheme" parent="@android:style/TextAppearance.Medium">
+        <item name="android:layout_height">56dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/eina_01_bold</item>
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">32dp</item>
+        <item name="android:layout_marginRight">32dp</item>
+    </style>
+
+    <style name="ButtonWithIconTheme">
+        <item name="android:layout_height">56dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:fontFamily">@font/eina_01_bold</item>
+        <item name="android:background">@color/cardview_light_background</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">25dp</item>
+    </style>
 </resources>

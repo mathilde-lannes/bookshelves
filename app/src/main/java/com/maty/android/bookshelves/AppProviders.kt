@@ -8,4 +8,6 @@ fun profilePresenter() = component().profilePresenter()
 
 fun addBookPresenter() = component().addBookPresenter()
 
+fun bookDetailsPresenter() = component().bookDetailsPresenter()
+
 fun welcomePresenter() = component().welcomePresenter()
