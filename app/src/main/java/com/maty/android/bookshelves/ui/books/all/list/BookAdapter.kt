@@ -9,15 +9,8 @@ import com.maty.android.bookshelves.R
 class BookAdapter() : RecyclerView.Adapter<BookHolder>() {
 
   private val items = mutableListOf<Book>()
-  private val favoriteBooksIds = mutableListOf<String>()
 
   override fun getItemCount() = items.size
-
-  fun setFavoriteBooksIds(ids: List<String>) {
-    favoriteBooksIds.clear()
-    favoriteBooksIds.addAll(ids)
-    notifyDataSetChanged()
-  }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.item_book, parent, false)
