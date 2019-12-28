@@ -9,7 +9,5 @@ interface AllBooksView {
 
   fun hideNoDataDescription()
 
-  fun setFavoriteBooksIds(favoriteBooksIds: List<String>)
-
   fun addBook(book: Book)
 }

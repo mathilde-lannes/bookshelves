@@ -23,7 +23,8 @@
   <string name="or">or</string>
     <string name="to_read">to read</string>
   <string name="to_buy">to buy</string>
-    <string name="books_to_read">Books to read</string>
-    <string name="start_reading">Start reading</string>
+  <string name="books_to_read">Books to read</string>
+  <string name="books_to_buy">Books to buy</string>
+   <string name="start_reading">Start reading</string>
   <string name="move_to_read">Move to reading list</string>
 </resources>

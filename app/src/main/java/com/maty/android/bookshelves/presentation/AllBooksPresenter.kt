@@ -4,7 +4,8 @@ import com.maty.android.bookshelves.ui.books.all.AllBooksView
 
 interface AllBooksPresenter : BasePresenter<AllBooksView> {
 
-  fun viewReady()
+  fun displayBooksToRead()
 
-  fun getAllBooks()
+  fun displayBooksToBuy()
+
 }
