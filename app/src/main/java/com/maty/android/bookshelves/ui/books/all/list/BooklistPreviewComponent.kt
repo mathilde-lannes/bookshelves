@@ -38,6 +38,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
     private fun initUi() {
         books.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         books.adapter = adapter
+//        seeAll.onClick { context.startActivity(Intent(context, AddBookActivity::class.java))  }
     }
 
     private fun initAttributes(attrs: AttributeSet?) {
@@ -49,7 +50,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
                             .booklist_preview_component_attributes_booklist_title,
                             R.string.books_to_read))
 
-            main_title.text = title
+            mainTitle.text = title
 
             when(title) {
                 resources.getString(R.string.books_to_buy) -> presenter.displayBooksToBuy()
