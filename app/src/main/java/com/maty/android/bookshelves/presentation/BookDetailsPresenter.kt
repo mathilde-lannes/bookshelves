@@ -10,4 +10,6 @@ interface BookDetailsPresenter : BasePresenter<BookDetailsView> {
     fun addToBuyBook(book: Book)
 
     fun addCurrentlyReadingBook(book: Book)
+
+    fun addAlreadyReadBook(book: Book)
 }

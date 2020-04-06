@@ -43,7 +43,7 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         when(book.status) {
             KEY_TO_BUY -> showToBuyAction()
             KEY_TO_READ -> showToReadAction()
-            KEY_READING -> showUpdateProgressionAction()
+            KEY_READING -> showFinishReadingAction()
             else -> showDefaultAction()
         }
     }
@@ -56,8 +56,8 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         toReadAction.visibility = View.VISIBLE
     }
 
-    private fun showUpdateProgressionAction() {
-        // TODO enhance UI to update reading progression
+    private fun showFinishReadingAction() {
+        finishReadingAction.visibility = View.VISIBLE
     }
 
     private fun showDefaultAction() {
@@ -69,6 +69,7 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         moveToReadButton.onClick { presenter.addToReadBook(this.book) }
         toBuyButton.onClick { presenter.addToBuyBook(this.book) }
         startReadingButton.onClick { presenter.addCurrentlyReadingBook(this.book) }
+        finishReadingButton.onClick { presenter.addAlreadyReadBook(this.book) }
     }
 
     override fun onBookAdded(book: Book) {

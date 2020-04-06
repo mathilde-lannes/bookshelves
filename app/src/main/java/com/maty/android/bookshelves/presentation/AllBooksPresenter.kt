@@ -8,5 +8,7 @@ interface AllBooksPresenter : BasePresenter<AllBooksView> {
 
   fun displayBooksToBuy()
 
-    fun displayBookCurrentlyReading()
+  fun displayBookCurrentlyReading()
+
+  fun displayBooksAlreadyRead()
 }

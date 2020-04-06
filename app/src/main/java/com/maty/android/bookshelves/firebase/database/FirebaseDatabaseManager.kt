@@ -9,8 +9,8 @@ import com.maty.android.bookshelves.model.mapToBook
 import javax.inject.Inject
 
 const val KEY_USER = "user"
-const val KEY_BOOK = "book"
 const val KEY_TO_READ = "read"
+const val KEY_ALREADY_READ = "already_read"
 const val KEY_READING = "reading"
 const val KEY_TO_BUY = "buy"
 const val KEY_FAVORITE = "favorite"
@@ -44,27 +44,16 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
         listenToBooks(maxBooks, KEY_TO_READ, onBookAdded)
     }
 
+    override fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit) {
+        listenToBooks(maxBooks, KEY_ALREADY_READ, onBookAdded)
+    }
+
     override fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit) {
         listenToBooks(maxBooks, KEY_READING, onBookAdded)
     }
 
     override fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit) {
         listenToBooks(maxBooks, KEY_TO_BUY, onBookAdded)
-    }
-
-    override fun getBookById(bookId: String, onResult: (Book) -> Unit) {
-        database.reference
-                .child(KEY_BOOK)
-                .child(bookId)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(error: DatabaseError?) = Unit
-
-                    override fun onDataChange(snapshot: DataSnapshot?) {
-                        val book = snapshot?.getValue(BookResponse::class.java)
-
-                        book?.run { onResult(mapToBook()) }
-                    }
-                })
     }
 
     private fun addBook(book: Book, collection: String, onResult: (Boolean) -> Unit) {
@@ -88,6 +77,10 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
 
     override fun addBookToBuy(book: Book, onResult: (Boolean) -> Unit) {
         addBook(book, KEY_TO_BUY, onResult)
+    }
+
+    override fun addBookAlreadyRead(book: Book, onResult: (Boolean) -> Unit) {
+        addBook(book, KEY_ALREADY_READ, onResult)
     }
 
     private fun removeBookFromCollection(book: Book, collection: String) {

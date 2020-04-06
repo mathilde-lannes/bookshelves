@@ -55,6 +55,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
 
             when(title) {
                 resources.getString(R.string.books_to_buy) -> presenter.displayBooksToBuy()
+                resources.getString(R.string.books_already_read) -> presenter.displayBooksAlreadyRead()
                 else -> presenter.displayBooksToRead()
             }
 

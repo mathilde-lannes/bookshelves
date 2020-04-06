@@ -29,4 +29,6 @@
   <string name="move_to_read">Move to reading list</string>
     <string name="see_all"><![CDATA[See all >]]></string>
     <string name="currently_reading">Currently reading</string>
+    <string name="books_already_read">Books already read</string>
+  <string name="finish_reading">Finish reading</string>
 </resources>

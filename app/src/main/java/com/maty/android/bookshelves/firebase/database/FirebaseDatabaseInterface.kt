@@ -15,6 +15,8 @@ interface FirebaseDatabaseInterface {
 
   fun addBookToBuy(book: Book, onResult: (Boolean) -> Unit)
 
+  fun addBookAlreadyRead(book: Book, onResult: (Boolean) -> Unit)
+
   fun removeBookToRead(book: Book)
 
   fun removeBookCurrentlyReading(book: Book)
@@ -29,7 +31,7 @@ interface FirebaseDatabaseInterface {
 
   fun getProfile(id: String, onResult: (User) -> Unit)
 
-  fun getBookById(bookId: String, onResult: (Book) -> Unit)
-
   fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit)
+
+  fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit)
 }
