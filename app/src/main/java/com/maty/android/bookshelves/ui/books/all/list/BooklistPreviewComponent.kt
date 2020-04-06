@@ -22,6 +22,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
     private val presenter by lazy { allBooksPresenter() }
     private val adapter by lazy { BookAdapter() }
 
+
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.component_booklist_preview, this, true)

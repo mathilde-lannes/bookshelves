@@ -5,6 +5,8 @@ import com.maty.android.bookshelves.presentation.AllBooksPresenter
 import com.maty.android.bookshelves.ui.books.all.AllBooksView
 import javax.inject.Inject
 
+const val MAX_BOOKS_PREVIEW = 5
+
 class AllBooksPresenterImpl @Inject constructor(
     private val databaseInterface: FirebaseDatabaseInterface
 ) : AllBooksPresenter {
@@ -15,11 +17,11 @@ class AllBooksPresenterImpl @Inject constructor(
   }
 
   override fun displayBooksToRead() {
-    databaseInterface.listenToBooksToRead { view.addBook(it) }
+    databaseInterface.listenToBooksToRead(MAX_BOOKS_PREVIEW) { view.addBook(it) }
   }
 
   override fun displayBooksToBuy() {
-    databaseInterface.listenToBooksToBuy { view.addBook(it) }
+    databaseInterface.listenToBooksToBuy(MAX_BOOKS_PREVIEW) { view.addBook(it) }
   }
 
 }

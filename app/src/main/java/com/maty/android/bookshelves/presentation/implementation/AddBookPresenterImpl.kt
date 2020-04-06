@@ -37,21 +37,13 @@ class AddBookPresenterImpl @Inject constructor(
   }
 
   override fun onNewBook(book: Book) {
-    databaseInterface.addNewBook(book) { onAddBookResult(it, book) }
+    view.onBookAdded(book)
   }
 
   override fun onSuggestionClicked(searchResult: SearchResult) {
     GlobalScope.launch {
       val book = grapi.getBookByGRID(searchResult.bookId).mapToBook()
       onNewBook(book)
-    }
-  }
-
-  private fun onAddBookResult(isSuccessful: Boolean, book: Book) {
-    if (isSuccessful) {
-      view.onBookAdded(book)
-    } else {
-      view.showAddBookError()
     }
   }
 }

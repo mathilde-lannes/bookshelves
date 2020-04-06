@@ -17,6 +17,7 @@ class BookDetailsPresenterImpl @Inject constructor(
     }
 
     override fun addToReadBook(book: Book) {
+        databaseInterface.removeBookToBuy(book)
         databaseInterface.addBookToRead(book) { onAddBookResult(it, book) }
     }
 
@@ -25,6 +26,7 @@ class BookDetailsPresenterImpl @Inject constructor(
     }
 
     override fun addCurrentlyReadingBook(book: Book) {
+        databaseInterface.removeBookToRead(book)
         databaseInterface.addBookCurrentlyReading(book) { onAddBookResult(it, book) }
     }
 
