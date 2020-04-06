@@ -28,4 +28,5 @@
    <string name="start_reading">Start reading</string>
   <string name="move_to_read">Move to reading list</string>
     <string name="see_all"><![CDATA[See all >]]></string>
+    <string name="currently_reading">Currently reading</string>
 </resources>

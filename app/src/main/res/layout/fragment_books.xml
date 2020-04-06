@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-  <com.maty.android.bookshelves.ui.books.all.list.BooklistPreviewComponent
-      android:id="@+id/booklist_preview_to_read"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_constraintTop_toTopOf="parent"
+    >
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:booklist_title="@string/books_to_read"
-      app:layout_constraintTop_toTopOf="parent"/>
+      android:layout_height="wrap_content">
 
-  <com.maty.android.bookshelves.ui.books.all.list.BooklistPreviewComponent
-      android:id="@+id/booklist_preview_to_buy"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      app:booklist_title="@string/books_to_buy"
-      app:layout_constraintTop_toBottomOf="@id/booklist_preview_to_read"/>
+    <com.maty.android.bookshelves.ui.books.all.list.CurrentlyReadingPreviewComponent
+        android:id="@+id/booklist_preview_currently_reading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.maty.android.bookshelves.ui.books.all.list.BooklistPreviewComponent
+        android:id="@+id/booklist_preview_to_read"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:booklist_title="@string/books_to_read"
+        app:layout_constraintTop_toBottomOf="@id/booklist_preview_currently_reading"/>
+
+    <com.maty.android.bookshelves.ui.books.all.list.BooklistPreviewComponent
+        android:id="@+id/booklist_preview_to_buy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:booklist_title="@string/books_to_buy"
+        app:layout_constraintTop_toBottomOf="@id/booklist_preview_to_read"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

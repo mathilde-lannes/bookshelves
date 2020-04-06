@@ -8,6 +8,7 @@ import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.bookDetailsPresenter
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
+import com.maty.android.bookshelves.firebase.database.KEY_READING
 import com.maty.android.bookshelves.firebase.database.KEY_TO_BUY
 import com.maty.android.bookshelves.firebase.database.KEY_TO_READ
 import com.maty.android.bookshelves.ui.main.MainActivity
@@ -42,6 +43,7 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         when(book.status) {
             KEY_TO_BUY -> showToBuyAction()
             KEY_TO_READ -> showToReadAction()
+            KEY_READING -> showUpdateProgressionAction()
             else -> showDefaultAction()
         }
     }
@@ -52,6 +54,10 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
     private fun showToReadAction() {
         toReadAction.visibility = View.VISIBLE
+    }
+
+    private fun showUpdateProgressionAction() {
+        // TODO enhance UI to update reading progression
     }
 
     private fun showDefaultAction() {
