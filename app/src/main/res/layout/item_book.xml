@@ -14,7 +14,9 @@
     <ImageView
         android:id="@+id/cover"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:layout_height="125dp"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
