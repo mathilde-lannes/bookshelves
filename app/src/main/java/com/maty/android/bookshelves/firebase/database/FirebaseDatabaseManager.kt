@@ -59,8 +59,8 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
         listenToBooks(maxBooks, KEY_ALREADY_READ, onBookAdded, onCompleted)
     }
 
-    override fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit) {
-        listenToBooks(maxBooks, KEY_READING, onBookAdded, {})
+    override fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {
+        listenToBooks(maxBooks, KEY_READING, onBookAdded, onCompleted)
     }
 
     override fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {

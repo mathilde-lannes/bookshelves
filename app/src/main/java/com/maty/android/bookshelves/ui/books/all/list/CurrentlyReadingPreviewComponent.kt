@@ -28,6 +28,7 @@ class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
         orientation = VERTICAL
 
         presenter.setView(this)
+        beforeFetchingBooks()
         presenter.displayBookCurrentlyReading()
 
     }
@@ -44,11 +45,21 @@ class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
         noItems.visibility = View.GONE
     }
 
-    override fun hidePlaceholder() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun beforeFetchingBooks() {
+        showPlaceholder()
     }
 
-    override fun showPlaceholder() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun afterFetchingBooks() {
+        hidePlaceholder()
+    }
+
+    private fun showPlaceholder() {
+        shimmerLayout.startShimmerAnimation()
+        shimmerLayout.visibility = View.VISIBLE
+    }
+
+    private fun hidePlaceholder() {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility = View.GONE
     }
 }

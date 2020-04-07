@@ -13,31 +13,30 @@
         android:textAlignment="center"
         style="@style/LabelTheme"/>
 
-    <ImageView
-        android:id="@+id/cover"
-        android:layout_width="150dp"
-        android:layout_height="190dp"
-        android:scaleType="centerCrop"
-        android:adjustViewBounds="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainTitle" />
-
-    <TextView
-        android:id="@+id/title"
+    <include layout="@layout/item_currently_reading_preview"
+        android:id="@+id/itemCurrentlyReading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/cover"
-        android:textAlignment="center"
-        style="@style/LabelTheme"
-        android:textSize="16dp"/>
+        app:layout_constraintTop_toBottomOf="@id/mainTitle"/>
 
-    <TextView
-        android:id="@+id/author"
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        android:textAlignment="center"
-        android:textSize="16dp"/>
+        app:layout_constraintTop_toBottomOf="@id/mainTitle"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <include layout="@layout/placeholder_currently_reading_preview"/>
+            <include layout="@layout/placeholder_currently_reading_preview"/>
+            <include layout="@layout/placeholder_currently_reading_preview"/>
+
+        </LinearLayout>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

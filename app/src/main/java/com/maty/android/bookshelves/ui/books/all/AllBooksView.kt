@@ -11,7 +11,7 @@ interface AllBooksView {
 
   fun addBook(book: Book)
 
-  fun showPlaceholder()
+  fun beforeFetchingBooks()
 
-  fun hidePlaceholder()
+  fun afterFetchingBooks()
 }

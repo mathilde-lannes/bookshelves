@@ -9,7 +9,7 @@ interface FirebaseDatabaseInterface {
 
   fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit)
 
-  fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit)
+  fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit)
 
   fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit)
 

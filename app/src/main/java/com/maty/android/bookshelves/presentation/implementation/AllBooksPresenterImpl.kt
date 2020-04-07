@@ -17,19 +17,19 @@ class AllBooksPresenterImpl @Inject constructor(
   }
 
   override fun displayBooksToRead() {
-    databaseInterface.listenToBooksToRead(MAX_BOOKS_PREVIEW, { view.addBook(it) }, { view.hidePlaceholder() })
+    databaseInterface.listenToBooksToRead(MAX_BOOKS_PREVIEW, { view.addBook(it) }, { view.afterFetchingBooks() })
   }
 
   override fun displayBooksToBuy() {
-    databaseInterface.listenToBooksToBuy(MAX_BOOKS_PREVIEW, { view.addBook(it) }, { view.hidePlaceholder() })
+    databaseInterface.listenToBooksToBuy(MAX_BOOKS_PREVIEW, { view.addBook(it) }, { view.afterFetchingBooks() })
   }
 
   override fun displayBooksAlreadyRead() {
-    databaseInterface.listenToBooksAlreadyRead(MAX_BOOKS_PREVIEW, { view.addBook(it) }, { view.hidePlaceholder() })
+    databaseInterface.listenToBooksAlreadyRead(MAX_BOOKS_PREVIEW, { view.addBook(it) }, { view.afterFetchingBooks() })
   }
 
   override fun displayBookCurrentlyReading() {
-    databaseInterface.listenToBooksCurrentlyReading(1) { view.addBook(it) }
+    databaseInterface.listenToBooksCurrentlyReading(1, { view.addBook(it) }, { view.afterFetchingBooks() })
   }
 
 }
