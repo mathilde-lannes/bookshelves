@@ -1,5 +1,6 @@
 package com.maty.android.bookshelves.ui.books.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -73,7 +74,9 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
     }
 
     override fun onBookAdded(book: Book) {
-        startActivity(MainActivity.getLaunchIntent(this))
+        val intent = MainActivity.getLaunchIntent(this)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intent)
     }
 
     override fun showBookError() {

@@ -95,24 +95,23 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
     }
 
     private fun removeBookFromCollection(book: Book, collection: String) {
-        book.status = collection
-
         database.reference
                 .child(collection)
                 .orderByChild("id")
                 .equalTo(book.id)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(error: DatabaseError?) = Unit
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (data in dataSnapshot.children) {
+                            val oldBook = data?.getValue(BookResponse::class.java)
 
-                    override fun onDataChange(snapshot: DataSnapshot?) {
-                        snapshot?.run {
-                            children.forEach { database.reference
-                                    .child(collection)
-                                    .child(it.key)
-                                    .setValue(null)
+                            if (oldBook != null) {
+                                data.ref.setValue(null)
+                            } else {
+                                data.ref.setValue(book)
                             }
                         }
                     }
+                    override fun onCancelled(error: DatabaseError?) = Unit
                 })
     }
 
