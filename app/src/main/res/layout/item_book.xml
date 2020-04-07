@@ -20,18 +20,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cover"
-        android:orientation="vertical">
-
       <TextView
           android:id="@+id/title"
           android:fontFamily="@font/eina_01_bold"
           android:textSize="14sp"
-          android:layout_width="match_parent"
+          android:layout_width="100dp"
           android:layout_height="wrap_content"
           android:paddingTop="10dp"
           android:paddingStart="5dp"
@@ -39,6 +32,8 @@
           android:lines="2"
           android:ellipsize="end"
           tools:text="The golden compass - his dark materials"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/cover"
           />
 
       <TextView
@@ -48,10 +43,11 @@
           android:paddingEnd="5dp"
           android:lines="2"
           android:ellipsize="end"
-          android:layout_width="match_parent"
+          android:layout_width="100dp"
           android:layout_height="wrap_content"
-          tools:text="The golden compass - his dark materials - Philip Pullman"/>
-    </LinearLayout>
+          tools:text="The golden compass - his dark materials - Philip Pullman"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/title"/>
 
 
   </androidx.constraintlayout.widget.ConstraintLayout>

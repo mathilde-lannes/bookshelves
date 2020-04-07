@@ -7,6 +7,10 @@ import com.maty.android.bookshelves.model.User
 import com.maty.android.bookshelves.model.UserResponse
 import com.maty.android.bookshelves.model.mapToBook
 import javax.inject.Inject
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.ValueEventListener
+
+
 
 const val KEY_USER = "user"
 const val KEY_TO_READ = "read"
@@ -23,7 +27,7 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
         database.reference.child(KEY_USER).child(id).setValue(user)
     }
 
-    private fun listenToBooks(maxBooks: Int, collection: String, onBookAdded: (Book) -> Unit) {
+    private fun listenToBooks(maxBooks: Int, collection: String, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {
         database.reference.child(collection)
                 .limitToLast(maxBooks)
                 .addChildEventListener(object : ChildEventListener {
@@ -38,22 +42,29 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
                         }
                     }
                 })
+
+        database.reference.ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                onCompleted(true)
+            }
+            override fun onCancelled(p0: DatabaseError) = Unit
+        })
     }
 
-    override fun listenToBooksToRead(maxBooks: Int, onBookAdded: (Book) -> Unit) {
-        listenToBooks(maxBooks, KEY_TO_READ, onBookAdded)
+    override fun listenToBooksToRead(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {
+        listenToBooks(maxBooks, KEY_TO_READ, onBookAdded, onCompleted)
     }
 
-    override fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit) {
-        listenToBooks(maxBooks, KEY_ALREADY_READ, onBookAdded)
+    override fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {
+        listenToBooks(maxBooks, KEY_ALREADY_READ, onBookAdded, onCompleted)
     }
 
     override fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit) {
-        listenToBooks(maxBooks, KEY_READING, onBookAdded)
+        listenToBooks(maxBooks, KEY_READING, onBookAdded, {})
     }
 
-    override fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit) {
-        listenToBooks(maxBooks, KEY_TO_BUY, onBookAdded)
+    override fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {
+        listenToBooks(maxBooks, KEY_TO_BUY, onBookAdded, onCompleted)
     }
 
     private fun addBook(book: Book, collection: String, onResult: (Boolean) -> Unit) {

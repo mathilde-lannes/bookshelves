@@ -39,7 +39,18 @@ class BooklistPreviewComponent @JvmOverloads constructor(
     private fun initUi() {
         books.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         books.adapter = adapter
+        showPlaceholder()
 //        seeAll.onClick { context.startActivity(Intent(context, AddBookActivity::class.java))  }
+    }
+
+    override fun showPlaceholder() {
+        shimmerLayout.startShimmerAnimation()
+        shimmerLayout.visibility = View.VISIBLE
+    }
+
+    override fun hidePlaceholder() {
+        shimmerLayout.stopShimmerAnimation()
+        shimmerLayout.visibility = View.GONE
     }
 
     private fun initAttributes(attrs: AttributeSet?) {

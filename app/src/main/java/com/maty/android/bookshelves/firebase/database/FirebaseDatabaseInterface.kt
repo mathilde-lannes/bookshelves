@@ -5,9 +5,13 @@ import com.maty.android.bookshelves.model.User
 
 interface FirebaseDatabaseInterface {
 
-  fun listenToBooksToRead(maxBooks: Int, onBookAdded: (Book) -> Unit)
+  fun listenToBooksToRead(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit)
 
-  fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit)
+  fun listenToBooksToBuy(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit)
+
+  fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit)
+
+  fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit)
 
   fun addBookToRead(book: Book, onResult: (Boolean) -> Unit)
 
@@ -30,8 +34,4 @@ interface FirebaseDatabaseInterface {
   fun createUser(id: String, name: String, email: String)
 
   fun getProfile(id: String, onResult: (User) -> Unit)
-
-  fun listenToBooksCurrentlyReading(maxBooks: Int, onBookAdded: (Book) -> Unit)
-
-  fun listenToBooksAlreadyRead(maxBooks: Int, onBookAdded: (Book) -> Unit)
 }

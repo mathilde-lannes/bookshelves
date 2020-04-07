@@ -43,4 +43,12 @@ class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
     override fun hideNoDataDescription() {
         noItems.visibility = View.GONE
     }
+
+    override fun hidePlaceholder() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun showPlaceholder() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

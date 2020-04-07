@@ -10,4 +10,8 @@ interface AllBooksView {
   fun hideNoDataDescription()
 
   fun addBook(book: Book)
+
+  fun showPlaceholder()
+
+  fun hidePlaceholder()
 }
