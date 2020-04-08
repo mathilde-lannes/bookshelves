@@ -1,6 +1,8 @@
 package com.maty.android.bookshelves.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 data class BookResponse(
@@ -41,9 +43,14 @@ data class AuthorResponse(
         val textReviewsCount: Int? = 0
 )
 
+//(foreignKeys = [ForeignKey(entity = Author::class,
+//parentColumns = arrayOf("id"),
+//childColumns = arrayOf("author"),
+//onDelete = ForeignKey.CASCADE)])
 @Parcelize
+@Entity
 data class Book(
-        val id: String,
+        @PrimaryKey val id: String,
         val isbn: String,
         val isbn13: String,
         val textReviewsCount: Int?,
@@ -63,14 +70,15 @@ data class Book(
         val averageRating: Float?,
         val ratingsCount: Int?,
         val description: String,
-        val authors: List<Author>,
+        val author: String,
         val workId: String,
         var status: String
 ) : Parcelable
 
+@Entity
 @Parcelize
 data class Author(
-        val id: String,
+        @PrimaryKey val id: String,
         val name: String,
         val role: String,
         val imageUrl: String,
@@ -85,10 +93,10 @@ fun AuthorResponse.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmal
 
 fun BookResponse.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
-        averageRating, ratingsCount, description, authors.map(AuthorResponse::mapToAuthor), workId, status)
+        averageRating, ratingsCount, description, authors[0].name, workId, status)
 
 fun com.intmainreturn00.grapi.Book.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
-        averageRating, ratingsCount, description, authors.map(com.intmainreturn00.grapi.Author::mapToAuthor), workId, "added")
+        averageRating, ratingsCount, description, authors[0].name, workId, "added")
 
 fun com.intmainreturn00.grapi.Author.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmall, link, averageRating, ratingsCount, textReviewsCount)

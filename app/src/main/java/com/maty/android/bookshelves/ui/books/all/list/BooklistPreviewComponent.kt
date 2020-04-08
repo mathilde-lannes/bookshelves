@@ -7,10 +7,13 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maty.android.bookshelves.R
-import com.maty.android.bookshelves.allBooksPresenter
 import com.maty.android.bookshelves.model.Book
+import com.maty.android.bookshelves.ui.books.BookViewModel
 import com.maty.android.bookshelves.ui.books.all.AllBooksView
 import kotlinx.android.synthetic.main.component_booklist_preview.view.*
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 
 class BooklistPreviewComponent @JvmOverloads constructor(
         context: Context,
@@ -19,28 +22,33 @@ class BooklistPreviewComponent @JvmOverloads constructor(
         defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyle, defStyleRes), AllBooksView {
 
-    private val presenter by lazy { allBooksPresenter() }
+    private var  viewModel  : BookViewModel
     private val adapter by lazy { BookAdapter() }
 
+    private val activity: FragmentActivity by lazy {
+        try {
+            context as FragmentActivity
+        } catch (exception: ClassCastException) {
+            throw ClassCastException("Please ensure that the provided Context is a valid FragmentActivity")
+        }
+    }
 
     init {
         LayoutInflater.from(context)
                 .inflate(R.layout.component_booklist_preview, this, true)
 
         orientation = VERTICAL
+        viewModel = ViewModelProvider(activity).get(BookViewModel::class.java)
 
-        initAttributes(attrs)
         initUi()
-
-        presenter.setView(this)
+        initAttributes(attrs)
 
     }
 
     private fun initUi() {
         books.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         books.adapter = adapter
-        beforeFetchingBooks()
-//        seeAll.onClick { context.startActivity(Intent(context, AddBookActivity::class.java))  }
+//        beforeFetchingBooks()
     }
 
     override fun beforeFetchingBooks() {
@@ -77,10 +85,17 @@ class BooklistPreviewComponent @JvmOverloads constructor(
 
             mainTitle.text = title
 
+            val bookObserver = Observer<List<Book>> { books ->
+                if (books.isEmpty()) {
+                    showNoDataDescription()
+                }
+                adapter.addBooks(books)
+            }
+
             when(title) {
-                resources.getString(R.string.books_to_buy) -> presenter.displayBooksToBuy()
-                resources.getString(R.string.books_already_read) -> presenter.displayBooksAlreadyRead()
-                else -> presenter.displayBooksToRead()
+                resources.getString(R.string.books_to_buy) -> viewModel.booksToBuy.observe(activity, bookObserver)
+                resources.getString(R.string.books_already_read) -> viewModel.booksAlreadyRead.observe(activity, bookObserver)
+                else -> viewModel.booksToRead.observe(activity, bookObserver)
             }
 
             typedArray.recycle()
@@ -88,7 +103,6 @@ class BooklistPreviewComponent @JvmOverloads constructor(
     }
 
     override fun addBook(book: Book) {
-        adapter.addBook(book)
         noItems.visibility = if (adapter.itemCount!=0) View.INVISIBLE else View.VISIBLE
     }
 

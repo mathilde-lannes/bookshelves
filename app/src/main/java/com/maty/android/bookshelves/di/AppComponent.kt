@@ -14,7 +14,5 @@ interface AppComponent {
 
   fun addBookPresenter(): AddBookPresenter
 
-  fun bookDetailsPresenter(): BookDetailsPresenter
-
   fun welcomePresenter(): WelcomePresenter
 }

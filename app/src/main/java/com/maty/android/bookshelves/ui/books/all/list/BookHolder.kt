@@ -12,10 +12,10 @@ class BookHolder(
     itemView: View
 ) : RecyclerView.ViewHolder(itemView) {
 
-  fun displayData(book: Book) = with(itemView) {
-    author.text = book.authors[0].name
-    title.text = book.title
-    Glide.with(context.applicationContext).load(book.imageUrl).into(itemView.cover)
+  fun displayData(book: Book?) = with(itemView) {
+    author.text = book?.author // TODO persist author to Room and use it
+    title.text = book?.title
+    Glide.with(context.applicationContext).load(book?.imageUrl).into(itemView.cover)
 
     itemView.setOnClickListener {
       val intent = Intent(context.applicationContext, BookDetailsActivity::class.java)
