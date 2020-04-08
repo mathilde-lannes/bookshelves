@@ -48,8 +48,12 @@ class BooklistPreviewComponent @JvmOverloads constructor(
         hideNoDataDescription()
     }
 
-    override fun afterFetchingBooks() {
+    override fun afterFetchingBooks(hasResults: Boolean) {
         hidePlaceholders()
+
+        if (!hasResults) {
+            showNoDataDescription()
+        }
     }
 
     private fun showPlaceholders() {

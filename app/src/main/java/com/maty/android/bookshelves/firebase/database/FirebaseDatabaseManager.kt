@@ -43,12 +43,13 @@ class FirebaseDatabaseManager @Inject constructor(private val database: Firebase
                     }
                 })
 
-        database.reference.ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                onCompleted(true)
-            }
-            override fun onCancelled(p0: DatabaseError) = Unit
-        })
+        database.reference.child(collection)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        onCompleted(dataSnapshot.exists())
+                    }
+                    override fun onCancelled(p0: DatabaseError) = Unit
+                })
     }
 
     override fun listenToBooksToRead(maxBooks: Int, onBookAdded: (Book) -> Unit, onCompleted: (Boolean) -> Unit) {

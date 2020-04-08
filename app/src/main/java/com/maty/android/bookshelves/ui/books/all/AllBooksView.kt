@@ -13,5 +13,5 @@ interface AllBooksView {
 
   fun beforeFetchingBooks()
 
-  fun afterFetchingBooks()
+  fun afterFetchingBooks(hasResults: Boolean)
 }

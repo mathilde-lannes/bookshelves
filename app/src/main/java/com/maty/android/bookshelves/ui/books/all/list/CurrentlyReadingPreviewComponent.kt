@@ -9,7 +9,9 @@ import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.allBooksPresenter
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.all.AllBooksView
-import kotlinx.android.synthetic.main.component_booklist_preview.view.*
+import kotlinx.android.synthetic.main.component_booklist_preview.view.noItems
+import kotlinx.android.synthetic.main.component_booklist_preview.view.shimmerLayout
+import kotlinx.android.synthetic.main.component_currently_reading_preview.view.*
 
 class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
         context: Context,
@@ -49,8 +51,13 @@ class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
         showPlaceholder()
     }
 
-    override fun afterFetchingBooks() {
+    override fun afterFetchingBooks(hasResults: Boolean) {
         hidePlaceholder()
+
+        if (!hasResults) {
+            itemCurrentlyReading.visibility = View.GONE
+            showNoDataDescription()
+        }
     }
 
     private fun showPlaceholder() {
