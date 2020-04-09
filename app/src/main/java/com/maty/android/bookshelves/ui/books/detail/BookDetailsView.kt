@@ -4,7 +4,7 @@ import com.maty.android.bookshelves.model.Book
 
 interface BookDetailsView {
 
-    fun onBookAdded(book: Book)
+    fun redirectToHomepage()
 
     fun showBook(book: Book)
 

@@ -6,10 +6,4 @@
       android:orderInCategory="0"
       android:title="@string/all_books_title"
       app:showAsAction="ifRoom"/>
-
-  <item
-      android:icon="@drawable/ic_profile"
-      android:orderInCategory="2"
-      android:title="@string/my_profile_title"
-      app:showAsAction="ifRoom"/>
 </menu>

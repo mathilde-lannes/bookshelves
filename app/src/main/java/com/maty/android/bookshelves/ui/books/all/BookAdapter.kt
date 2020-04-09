@@ -1,10 +1,10 @@
-package com.maty.android.bookshelves.ui.books.all.list
+package com.maty.android.bookshelves.ui.books.all
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.maty.android.bookshelves.model.Book
+import androidx.recyclerview.widget.RecyclerView
 import com.maty.android.bookshelves.R
+import com.maty.android.bookshelves.model.Book
 
 class BookAdapter() : RecyclerView.Adapter<BookHolder>() {
 
@@ -25,7 +25,11 @@ class BookAdapter() : RecyclerView.Adapter<BookHolder>() {
   }
 
   fun addBook(book: Book) {
-    items.add(0, book)
-    notifyItemInserted(0)
+    items.add(book)
+    notifyItemInserted(items.size - 1)
+  }
+
+  fun addBooks(books: List<Book>) {
+    books.forEach { addBook(it) }
   }
 }
