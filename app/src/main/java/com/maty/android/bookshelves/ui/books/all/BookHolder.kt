@@ -13,7 +13,7 @@ class BookHolder(
 ) : RecyclerView.ViewHolder(itemView) {
 
   fun displayData(book: Book?) = with(itemView) {
-    author.text = book?.author // TODO persist author to Room and use it
+    author.text = book?.author?.name
     title.text = book?.title
     Glide.with(context.applicationContext).load(book?.imageUrl).into(itemView.cover)
 

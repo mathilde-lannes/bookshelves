@@ -1,6 +1,7 @@
 package com.maty.android.bookshelves.model
 
 import android.os.Parcelable
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
@@ -32,10 +33,6 @@ data class BookResponse(
         val status: String = ""
 )
 
-//(foreignKeys = [ForeignKey(entity = Author::class,
-//parentColumns = arrayOf("id"),
-//childColumns = arrayOf("author"),
-//onDelete = ForeignKey.CASCADE)])
 @Parcelize
 @Entity
 data class Book(
@@ -59,7 +56,7 @@ data class Book(
         val averageRating: Float?,
         val ratingsCount: Int?,
         val description: String,
-        val author: String,
+        @Embedded(prefix = "author_") val author: Author?,
         val workId: String,
         var status: String,
         var entryDate: LocalDateTime
@@ -67,8 +64,8 @@ data class Book(
 
 fun BookResponse.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
-        averageRating, ratingsCount, description, authors[0].name, workId, status, LocalDateTime.now())
+        averageRating, ratingsCount, description, authors[0].mapToAuthor(), workId, status, LocalDateTime.now())
 
 fun com.intmainreturn00.grapi.Book.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
-        averageRating, ratingsCount, description, authors[0].name, workId, "added", LocalDateTime.now())
+        averageRating, ratingsCount, description, authors[0].mapToAuthor(), workId, "added", LocalDateTime.now())

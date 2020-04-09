@@ -27,7 +27,7 @@ class Converters {
         return date?.atZone(ZoneId.systemDefault())?.toInstant()?.toEpochMilli()
     }
 }
-@Database(entities = [Book::class, Author::class], version = 1)
+@Database(entities = [Book::class], version = 1)
 @TypeConverters(Converters::class)
 abstract class BookDb : RoomDatabase() {
     abstract fun bookDao(): BookDao

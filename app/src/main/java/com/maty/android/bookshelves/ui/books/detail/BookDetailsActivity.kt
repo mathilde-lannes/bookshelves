@@ -32,7 +32,7 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
     override fun showBook(book: Book) {
         this.book = book
         bookTitle.text = book.title
-        bookAuthor.text = book.author // TODO persist author to Room and use it
+        bookAuthor.text = book.author?.name
         bookDescription.text = book.description
 
         showBookActions()
