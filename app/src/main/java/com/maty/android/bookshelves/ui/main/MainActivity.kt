@@ -9,7 +9,6 @@ import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.ui.addBook.AddBookActivity
 import com.maty.android.bookshelves.ui.books.all.AllBooksFragment
 import com.maty.android.bookshelves.ui.main.pager.MainPagerAdapter
-import com.maty.android.bookshelves.ui.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -29,10 +28,10 @@ class MainActivity : AppCompatActivity() {
 
   private fun initUi() {
     val adapter = MainPagerAdapter(this)
-    adapter.setPages(listOf(AllBooksFragment(), ProfileFragment()))
+    adapter.setPages(listOf(AllBooksFragment()))
 
     mainPager.adapter = adapter
-    mainPager.offscreenPageLimit = 2
+    mainPager.offscreenPageLimit = 1
     mainPager.isUserInputEnabled = false;
     bottomNavigation.setOnNavigationItemSelectedListener {
       switchNavigationTab(it.order)

@@ -2,7 +2,6 @@
   <string name="app_name">bookshelves</string>
     <string name="log_in_button">Log in to Goodreads</string>
   <string name="all_books_title">All books</string>
-    <string name="my_profile_title">My profile</string>
   <string name="log_out_button">Log out</string>
   <string name="number_of_books_text">Number of favorite books: %d</string>
   <string name="email_text">User email: %s</string>

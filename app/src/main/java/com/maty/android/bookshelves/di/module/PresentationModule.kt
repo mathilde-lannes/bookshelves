@@ -9,8 +9,5 @@ import dagger.Module
 abstract class PresentationModule {
 
   @Binds
-  abstract fun profilePresenter(profilePresenterImpl: ProfilePresenterImpl): ProfilePresenter
-
-  @Binds
   abstract fun welcomePresenter(welcomePresenterImpl: WelcomePresenterImpl): WelcomePresenter
 }
