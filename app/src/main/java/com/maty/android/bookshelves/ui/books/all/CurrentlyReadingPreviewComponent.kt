@@ -37,12 +37,11 @@ class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
                 .inflate(R.layout.component_currently_reading_preview, this, true)
 
         orientation = VERTICAL
+        showPlaceholder()
 
         val bookObserver = Observer<List<Book>> { books ->
-            if (books.isEmpty()) {
-                itemCurrentlyReading.visibility = View.GONE
-                showNoDataDescription()
-            } else {
+            afterFetchingBooks(books.isNotEmpty())
+            if (books.isNotEmpty()) {
                 BookHolder(this).displayData(books[0])
             }
         }

@@ -47,7 +47,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
     private fun initUi() {
         books.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         books.adapter = adapter
-//        beforeFetchingBooks()
+        beforeFetchingBooks()
     }
 
     override fun beforeFetchingBooks() {
@@ -85,9 +85,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
             mainTitle.text = title
 
             val bookObserver = Observer<List<Book>> { books ->
-                if (books.isEmpty()) {
-                    showNoDataDescription()
-                }
+                afterFetchingBooks(books.isNotEmpty())
                 adapter.addBooks(books)
             }
 
