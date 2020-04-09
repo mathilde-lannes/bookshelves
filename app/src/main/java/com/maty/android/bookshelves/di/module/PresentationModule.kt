@@ -5,11 +5,8 @@ import com.maty.android.bookshelves.presentation.implementation.*
 import dagger.Binds
 import dagger.Module
 
-@Module(includes = [InteractionModule::class])
+@Module()
 abstract class PresentationModule {
-
-  @Binds
-  abstract fun allBooksPresenter(allBooksPresenterImpl: AllBooksPresenterImpl): AllBooksPresenter
 
   @Binds
   abstract fun profilePresenter(profilePresenterImpl: ProfilePresenterImpl): ProfilePresenter

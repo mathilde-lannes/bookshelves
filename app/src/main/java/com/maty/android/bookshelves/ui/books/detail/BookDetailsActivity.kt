@@ -9,11 +9,8 @@ import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
-import com.maty.android.bookshelves.firebase.database.KEY_ALREADY_READ
-import com.maty.android.bookshelves.firebase.database.KEY_READING
-import com.maty.android.bookshelves.firebase.database.KEY_TO_BUY
-import com.maty.android.bookshelves.firebase.database.KEY_TO_READ
 import com.maty.android.bookshelves.ui.books.BookViewModel
+import com.maty.android.bookshelves.ui.books.*
 import com.maty.android.bookshelves.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_add_book_details.*
 
@@ -51,8 +48,7 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
     }
 
     private fun registerBook(status : String) {
-        this.book.status = status
-        viewModel.insert(this.book)
+        viewModel.insert(this.book, status)
         redirectToHomepage()
     }
 

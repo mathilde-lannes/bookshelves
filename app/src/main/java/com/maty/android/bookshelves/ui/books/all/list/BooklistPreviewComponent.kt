@@ -22,7 +22,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
         defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyle, defStyleRes), AllBooksView {
 
-    private var  viewModel  : BookViewModel
+    private var viewModel : BookViewModel
     private val adapter by lazy { BookAdapter() }
 
     private val activity: FragmentActivity by lazy {
@@ -93,17 +93,13 @@ class BooklistPreviewComponent @JvmOverloads constructor(
             }
 
             when(title) {
-                resources.getString(R.string.books_to_buy) -> viewModel.booksToBuy.observe(activity, bookObserver)
-                resources.getString(R.string.books_already_read) -> viewModel.booksAlreadyRead.observe(activity, bookObserver)
-                else -> viewModel.booksToRead.observe(activity, bookObserver)
+                resources.getString(R.string.books_to_buy) -> viewModel.booksToBuyPreview.observe(activity, bookObserver)
+                resources.getString(R.string.books_already_read) -> viewModel.booksAlreadyReadPreview.observe(activity, bookObserver)
+                else -> viewModel.booksToReadPreview.observe(activity, bookObserver)
             }
 
             typedArray.recycle()
         }
-    }
-
-    override fun addBook(book: Book) {
-        noItems.visibility = if (adapter.itemCount!=0) View.INVISIBLE else View.VISIBLE
     }
 
     override fun showNoDataDescription() {

@@ -5,7 +5,6 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.maty.android.bookshelves.model.Book
 import com.intmainreturn00.grapi.SearchResult
 import com.intmainreturn00.grapi.grapi
-import com.maty.android.bookshelves.firebase.database.FirebaseDatabaseInterface
 import com.maty.android.bookshelves.model.mapToBook
 import com.maty.android.bookshelves.presentation.AddBookPresenter
 import com.maty.android.bookshelves.ui.addBook.AddBookView
@@ -14,7 +13,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AddBookPresenterImpl @Inject constructor(
-    private val databaseInterface: FirebaseDatabaseInterface
 ) : AddBookPresenter {
 
   private lateinit var view: AddBookView

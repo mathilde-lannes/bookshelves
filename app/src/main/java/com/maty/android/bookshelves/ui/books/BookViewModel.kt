@@ -3,25 +3,40 @@ package com.maty.android.bookshelves.ui.books
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.maty.android.bookshelves.data.BookDb
-import com.maty.android.bookshelves.firebase.database.KEY_ALREADY_READ
-import com.maty.android.bookshelves.firebase.database.KEY_READING
-import com.maty.android.bookshelves.firebase.database.KEY_TO_BUY
-import com.maty.android.bookshelves.firebase.database.KEY_TO_READ
 import com.maty.android.bookshelves.ioThread
 import com.maty.android.bookshelves.model.Book
+import java.time.LocalDateTime
 
+const val NB_PREVIEW_COLLECTION = 5
+const val NB_PREVIEW_READING = 1
+
+const val KEY_TO_READ = "read"
+const val KEY_ALREADY_READ = "already_read"
+const val KEY_READING = "reading"
+const val KEY_TO_BUY = "buy"
 /**
  * A simple ViewModel that provides a paged list of books.
  */
 class BookViewModel(app: Application) : AndroidViewModel(app) {
-    val dao = BookDb.get(app).bookDao()
+    private val dao = BookDb.get(app).bookDao()
 
     val booksToRead = dao.booksByStatus(KEY_TO_READ)
     val booksToBuy = dao.booksByStatus(KEY_TO_BUY)
     val booksAlreadyRead = dao.booksByStatus(KEY_ALREADY_READ)
     val booksCurrentlyReading = dao.booksByStatus(KEY_READING)
 
+    val booksToReadPreview = dao.booksByStatus(KEY_TO_READ, NB_PREVIEW_COLLECTION)
+    val booksToBuyPreview = dao.booksByStatus(KEY_TO_BUY, NB_PREVIEW_COLLECTION)
+    val booksAlreadyReadPreview = dao.booksByStatus(KEY_ALREADY_READ, NB_PREVIEW_COLLECTION)
+    val booksCurrentlyReadingPreview = dao.booksByStatus(KEY_READING, NB_PREVIEW_READING)
+
     fun insert(book: Book) = ioThread {
+        dao.insert(book)
+    }
+
+    fun insert(book: Book, status : String) = ioThread {
+        book.status = status
+        book.entryDate = LocalDateTime.now()
         dao.insert(book)
     }
 

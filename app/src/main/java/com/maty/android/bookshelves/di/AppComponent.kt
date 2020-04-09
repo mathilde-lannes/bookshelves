@@ -8,8 +8,6 @@ import javax.inject.Singleton
 @Component(modules = [PresentationModule::class])
 @Singleton
 interface AppComponent {
-  fun allBooksPresenter(): AllBooksPresenter
-
   fun profilePresenter(): ProfilePresenter
 
   fun addBookPresenter(): AddBookPresenter

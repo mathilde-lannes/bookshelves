@@ -4,6 +4,8 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import java.sql.Date
+import java.time.LocalDateTime
 
 data class BookResponse(
         val id: String = "",
@@ -72,7 +74,8 @@ data class Book(
         val description: String,
         val author: String,
         val workId: String,
-        var status: String
+        var status: String,
+        var entryDate: LocalDateTime
 ) : Parcelable
 
 @Entity
@@ -93,10 +96,10 @@ fun AuthorResponse.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmal
 
 fun BookResponse.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
-        averageRating, ratingsCount, description, authors[0].name, workId, status)
+        averageRating, ratingsCount, description, authors[0].name, workId, status, LocalDateTime.now())
 
 fun com.intmainreturn00.grapi.Book.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
-        averageRating, ratingsCount, description, authors[0].name, workId, "added")
+        averageRating, ratingsCount, description, authors[0].name, workId, "added", LocalDateTime.now())
 
 fun com.intmainreturn00.grapi.Author.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmall, link, averageRating, ratingsCount, textReviewsCount)

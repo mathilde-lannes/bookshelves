@@ -9,8 +9,11 @@ import com.maty.android.bookshelves.model.Book
  */
 @Dao
 interface BookDao {
-    @Query("SELECT * FROM Book WHERE status = :status")
+    @Query("SELECT * FROM Book WHERE status = :status ORDER BY entryDate DESC")
     fun booksByStatus(status : String): LiveData<List<Book>>
+
+    @Query("SELECT * FROM Book WHERE status = :status ORDER BY entryDate DESC LIMIT :limit")
+    fun booksByStatus(status : String, limit: Int): LiveData<List<Book>>
 
     @Insert
     fun insert(books: List<Book>)

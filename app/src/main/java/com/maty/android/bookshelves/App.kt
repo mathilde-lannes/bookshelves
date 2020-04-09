@@ -1,7 +1,6 @@
 package com.maty.android.bookshelves
 
 import android.app.Application
-import com.google.firebase.FirebaseApp
 import com.intmainreturn00.grapi.grapi
 import com.maty.android.bookshelves.di.AppComponent
 import com.maty.android.bookshelves.di.DaggerAppComponent
@@ -19,7 +18,6 @@ class App : Application() {
     super.onCreate()
     instance = this
 
-    FirebaseApp.initializeApp(this)
     grapi.init(this, BuildConfig.goodreadsKey, BuildConfig.goodreadsSecret, BuildConfig.goodreadsCallback)
   }
 }
