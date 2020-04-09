@@ -22,15 +22,10 @@ data class AuthorResponse(
 data class Author(
         @PrimaryKey val id: String,
         val name: String,
-        val role: String,
         val imageUrl: String,
-        val imageUrlSmall: String,
-        val link: String,
-        val averageRating: Float?,
-        val ratingsCount: Int?,
-        val textReviewsCount: Int?
+        val averageRating: Float?
 ) : Parcelable
 
-fun AuthorResponse.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmall, link, averageRating, ratingsCount, textReviewsCount)
+fun AuthorResponse.mapToAuthor() = Author(id, name, imageUrl, averageRating)
 
-fun com.intmainreturn00.grapi.Author.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmall, link, averageRating, ratingsCount, textReviewsCount)
+fun com.intmainreturn00.grapi.Author.mapToAuthor() = Author(id, name, imageUrl, averageRating)
