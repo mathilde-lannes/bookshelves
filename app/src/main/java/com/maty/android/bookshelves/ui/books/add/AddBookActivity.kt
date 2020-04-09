@@ -1,50 +1,52 @@
-package com.maty.android.bookshelves.ui.addBook
+package com.maty.android.bookshelves.ui.books.add
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import com.maty.android.bookshelves.model.Book
 import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
-import com.maty.android.bookshelves.addBookPresenter
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
-import com.maty.android.bookshelves.ui.addBook.suggestions.SuggestionAdapter
+import com.maty.android.bookshelves.ui.books.add.suggestions.SuggestionAdapter
+import com.maty.android.bookshelves.ui.books.BookViewModel
 import com.maty.android.bookshelves.ui.books.detail.BookDetailsActivity
 import kotlinx.android.synthetic.main.activity_add_book.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AddBookActivity : AppCompatActivity(), AddBookView {
 
-  private val presenter by lazy { addBookPresenter() }
+  private val viewModel by viewModels<BookViewModel>()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_add_book)
-    presenter.setView(this)
 
     initUi()
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
     val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
 
-    if(result != null){
+    if (result != null) {
 
-      if(result.contents != null){
-        presenter.getGoodreadsBookByISBN(result.contents)
-      } else {
+      if (result.contents != null) {
+        GlobalScope.launch {
+          val book = viewModel.findBookByISBN(result.contents)
+          onBookAdded(book)
+        }
+      } else
         showBookError()
-      }
-    } else {
+    } else
       super.onActivityResult(requestCode, resultCode, data)
-    }
   }
 
   private fun initUi() {
-    addBookButton.onClick { presenter.scanBarcode(this) }
+    addBookButton.onClick { viewModel.scanBarcode(this) }
 
     val adapter = SuggestionAdapter(this, R.layout.item_suggestion, listOf())
     autocomplete.setAdapter(adapter)
@@ -52,8 +54,13 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     autocomplete.setOnItemClickListener { parent, _, position, _ ->
       val selectedSuggestion = parent.adapter.getItem(position) as SearchResult?
       autocomplete.setText(selectedSuggestion?.bookTitle)
-      if (selectedSuggestion != null)
-        presenter.onSuggestionClicked(selectedSuggestion)
+
+      if (selectedSuggestion != null) {
+        GlobalScope.launch {
+          val book = viewModel.findBookByGRID(selectedSuggestion.bookId)
+          onBookAdded(book)
+        }
+      }
       else
         showBookError()
     }

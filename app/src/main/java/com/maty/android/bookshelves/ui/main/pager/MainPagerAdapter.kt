@@ -1,10 +1,11 @@
 package com.maty.android.bookshelves.ui.main.pager
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class MainPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+
+class MainPagerAdapter(manager: FragmentActivity) : FragmentStateAdapter(manager) {
 
   private val pages = mutableListOf<Fragment>()
 
@@ -14,6 +15,8 @@ class MainPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager)
     notifyDataSetChanged()
   }
 
-  override fun getItem(position: Int): Fragment = pages[position]
-  override fun getCount() = pages.size
+  override fun getItemCount(): Int = pages.size
+
+  override fun createFragment(position: Int): Fragment = pages[position]
+
 }

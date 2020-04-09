@@ -1,7 +1,5 @@
 package com.maty.android.bookshelves.ui.books.all
 
-import com.maty.android.bookshelves.model.Book
-
 
 interface AllBooksView {
 
@@ -9,7 +7,7 @@ interface AllBooksView {
 
   fun hideNoDataDescription()
 
-  fun setFavoriteBooksIds(favoriteBooksIds: List<String>)
+  fun beforeFetchingBooks()
 
-  fun addBook(book: Book)
+  fun afterFetchingBooks(hasResults: Boolean)
 }

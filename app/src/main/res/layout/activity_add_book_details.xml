@@ -103,4 +103,23 @@
             style="@style/ButtonWithIconTheme" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/finishReadingAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/finishReadingButton"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:drawableTint="@color/colorPrimary"
+            android:drawableTop="@drawable/books"
+            android:text="@string/finish_reading"
+            style="@style/ButtonWithIconTheme" />
+    </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
