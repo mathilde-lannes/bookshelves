@@ -17,10 +17,9 @@ data class AuthorResponse(
         val textReviewsCount: Int? = 0
 )
 
-@Entity
 @Parcelize
 data class Author(
-        @PrimaryKey val id: String,
+        val id: String,
         val name: String,
         val imageUrl: String,
         val averageRating: Float?
