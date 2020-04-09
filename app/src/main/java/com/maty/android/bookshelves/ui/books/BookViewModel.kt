@@ -3,8 +3,6 @@ package com.maty.android.bookshelves.ui.books
 import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.google.zxing.integration.android.IntentIntegrator
 import com.intmainreturn00.grapi.grapi
 import com.maty.android.bookshelves.data.BookDb

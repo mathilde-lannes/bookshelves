@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
-import com.maty.android.bookshelves.common.onPageChange
 import com.maty.android.bookshelves.ui.addBook.AddBookActivity
 import com.maty.android.bookshelves.ui.books.all.AllBooksFragment
 import com.maty.android.bookshelves.ui.main.pager.MainPagerAdapter
@@ -29,20 +28,16 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun initUi() {
-    val adapter = MainPagerAdapter(supportFragmentManager)
+    val adapter = MainPagerAdapter(this)
     adapter.setPages(listOf(AllBooksFragment(), ProfileFragment()))
 
     mainPager.adapter = adapter
     mainPager.offscreenPageLimit = 2
+    mainPager.isUserInputEnabled = false;
     bottomNavigation.setOnNavigationItemSelectedListener {
       switchNavigationTab(it.order)
+      mainPager.currentItem = it.order
       true
-    }
-
-    mainPager.onPageChange { position ->
-      val item = bottomNavigation.menu.getItem(position)
-
-      bottomNavigation.selectedItemId = item.itemId
     }
 
     addBook.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
