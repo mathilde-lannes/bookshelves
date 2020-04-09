@@ -10,7 +10,5 @@ import javax.inject.Singleton
 interface AppComponent {
   fun profilePresenter(): ProfilePresenter
 
-  fun addBookPresenter(): AddBookPresenter
-
   fun welcomePresenter(): WelcomePresenter
 }

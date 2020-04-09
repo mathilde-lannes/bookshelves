@@ -12,8 +12,5 @@ abstract class PresentationModule {
   abstract fun profilePresenter(profilePresenterImpl: ProfilePresenterImpl): ProfilePresenter
 
   @Binds
-  abstract fun addBookPresenter(addBookPresenterImpl: AddBookPresenterImpl): AddBookPresenter
-
-  @Binds
   abstract fun welcomePresenter(welcomePresenterImpl: WelcomePresenterImpl): WelcomePresenter
 }

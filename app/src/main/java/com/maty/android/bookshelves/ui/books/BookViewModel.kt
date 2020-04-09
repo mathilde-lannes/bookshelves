@@ -1,10 +1,17 @@
 package com.maty.android.bookshelves.ui.books
 
+import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.google.zxing.integration.android.IntentIntegrator
+import com.intmainreturn00.grapi.grapi
 import com.maty.android.bookshelves.data.BookDb
 import com.maty.android.bookshelves.ioThread
 import com.maty.android.bookshelves.model.Book
+import com.maty.android.bookshelves.model.mapToBook
+import kotlinx.coroutines.*
 import java.time.LocalDateTime
 
 const val NB_PREVIEW_COLLECTION = 5
@@ -46,5 +53,19 @@ class BookViewModel(app: Application) : AndroidViewModel(app) {
 
     fun remove(book: Book) = ioThread {
         dao.delete(book)
+    }
+
+    suspend fun findBookByISBN(isbn: String) : Book = withContext(Dispatchers.IO) {
+        grapi.getBookByISBN(isbn).mapToBook()
+    }
+
+    suspend fun findBookByGRID(id: String) : Book = withContext(Dispatchers.IO) {
+        grapi.getBookByGRID(id).mapToBook()
+    }
+
+    fun scanBarcode(activity : Activity) {
+        run {
+            IntentIntegrator(activity).initiateScan()
+        }
     }
 }
