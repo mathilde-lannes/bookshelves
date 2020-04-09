@@ -1,12 +1,12 @@
 <resources>
   <string name="app_name">bookshelves</string>
-    <string name="log_in_button">Log in to Goodreads</string>
+  <string name="log_in_button">Log in to Goodreads</string>
   <string name="all_books_title">All books</string>
   <string name="log_out_button">Log out</string>
   <string name="number_of_books_text">Number of favorite books: %d</string>
   <string name="email_text">User email: %s</string>
   <string name="username_text">Username: %s</string>
-    <string name="no_items_text">There seems to be no items :[</string>
+  <string name="no_items_text">There seems to be no items :[</string>
   <string name="error_title">Oops</string>
   <string name="error_message">Something went wrong! Please try again.</string>
   <string name="general_positive_button">OK</string>
@@ -20,14 +20,24 @@
   <string name="scan_barcode">Scan a barcode</string>
   <string name="book_search_placeholder">Type a book name or author…</string>
   <string name="or">or</string>
-    <string name="to_read">to read</string>
+  <string name="to_read">to read</string>
   <string name="to_buy">to buy</string>
   <string name="books_to_read">Books to read</string>
   <string name="books_to_buy">Books to buy</string>
-   <string name="start_reading">Start reading</string>
+  <string name="start_reading">Start reading</string>
   <string name="move_to_read">Move to reading list</string>
-    <string name="see_all"><![CDATA[See all >]]></string>
-    <string name="currently_reading">Currently reading</string>
-    <string name="books_already_read">Books already read</string>
+  <string name="see_all"><![CDATA[See all >]]></string>
+  <string name="currently_reading">Currently reading</string>
+  <string name="books_already_read">Books already read</string>
   <string name="finish_reading">Finish reading</string>
+
+  <!--  No items-->
+  <string name="no_books_to_buy_title">You don\'t have books to buy yet.</string>
+  <string name="no_books_to_buy_subtitle">Try adding one by clicking on the + icon !</string>
+  <string name="no_books_to_read_title">You don\'t have books to read yet.</string>
+  <string name="no_books_to_read_subtitle">Try adding one by clicking on the + icon or by starting to read a book you\'ve bought !</string>
+  <string name="no_books_already_read_title">You haven\'t finished a book yet.</string>
+  <string name="no_books_already_read_subtitle">Try finishing a book you\'re currently reading !</string>
+  <string name="no_books_currently_reading_title">You\'re not currently reading a book.</string>
+  <string name="no_books_currently_reading_subtitle">Try starting reading a book !</string>
 </resources>

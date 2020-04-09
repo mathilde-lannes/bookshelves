@@ -56,12 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
+        <com.maty.android.bookshelves.ui.books.all.EmptyBooklistComponent
             android:id="@+id/noItems"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/no_items_text"
             android:visibility="gone"/>
 
     </LinearLayout>

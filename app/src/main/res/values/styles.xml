@@ -18,6 +18,15 @@
         <item name="android:paddingEnd">10sp</item>
     </style>
 
+    <style name="TitleTheme" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/eina_01_bold</item>
+        <item name="android:paddingTop">15sp</item>
+        <item name="android:paddingBottom">10sp</item>
+        <item name="android:paddingEnd">10sp</item>
+    </style>
+
     <style name="ButtonTheme" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_height">56dp</item>
         <item name="android:textColor">@color/white</item>

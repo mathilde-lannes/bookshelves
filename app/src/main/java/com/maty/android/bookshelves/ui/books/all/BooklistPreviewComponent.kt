@@ -5,14 +5,14 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
 import kotlinx.android.synthetic.main.component_booklist_preview.view.*
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 
 class BooklistPreviewComponent @JvmOverloads constructor(
         context: Context,
@@ -82,6 +82,7 @@ class BooklistPreviewComponent @JvmOverloads constructor(
                             .booklist_preview_component_attributes_booklist_title,
                             R.string.books_to_read))
 
+            noItems.setType(title.toString())
             mainTitle.text = title
 
             val bookObserver = Observer<List<Book>> { books ->

@@ -46,6 +46,7 @@ class CurrentlyReadingPreviewComponent @JvmOverloads constructor(
             }
         }
 
+        noItems.setType(resources.getString(R.string.currently_reading))
         viewModel = ViewModelProvider(activity).get(BookViewModel::class.java)
         viewModel.booksCurrentlyReadingPreview.observe(activity, bookObserver)
 
