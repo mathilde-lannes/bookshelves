@@ -4,10 +4,8 @@ import android.os.Bundle
 import com.intmainreturn00.grapi.grapi
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.ScopedAppActivity
-import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
 import com.maty.android.bookshelves.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_welcome.*
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.browse
 
@@ -17,7 +15,7 @@ class WelcomeActivity : ScopedAppActivity(), WelcomeView {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_welcome)
 
-    goodreads.onClick { onGoodreadsSuccess() }
+    if (intent.data == null) { onGoodreadsSuccess() }
 
     launch {
       grapi.loginEnd(intent) { ok ->
