@@ -6,7 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
-import com.maty.android.bookshelves.ui.addBook.AddBookActivity
+import com.maty.android.bookshelves.ui.books.add.AddBookActivity
 import com.maty.android.bookshelves.ui.books.all.AllBooksFragment
 import com.maty.android.bookshelves.ui.main.pager.MainPagerAdapter
 import kotlinx.android.synthetic.main.activity_main.*

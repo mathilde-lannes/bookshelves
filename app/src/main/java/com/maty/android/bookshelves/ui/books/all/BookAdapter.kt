@@ -1,4 +1,4 @@
-package com.maty.android.bookshelves.ui.books.all.list
+package com.maty.android.bookshelves.ui.books.all
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

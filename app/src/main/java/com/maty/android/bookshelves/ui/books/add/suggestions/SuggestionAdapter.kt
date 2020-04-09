@@ -1,4 +1,4 @@
-package com.maty.android.bookshelves.ui.addBook.suggestions
+package com.maty.android.bookshelves.ui.books.add.suggestions
 
 import android.content.Context
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.maty.android.bookshelves.ui.books.all.list
+package com.maty.android.bookshelves.ui.books.all
 
 import android.content.Context
 import android.util.AttributeSet
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
-import com.maty.android.bookshelves.ui.books.all.AllBooksView
 import kotlinx.android.synthetic.main.component_booklist_preview.view.*
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer

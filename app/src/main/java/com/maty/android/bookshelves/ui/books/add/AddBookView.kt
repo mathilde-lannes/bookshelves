@@ -1,4 +1,4 @@
-package com.maty.android.bookshelves.ui.addBook
+package com.maty.android.bookshelves.ui.books.add
 
 import com.maty.android.bookshelves.model.Book
 

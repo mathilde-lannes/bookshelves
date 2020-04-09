@@ -1,4 +1,4 @@
-package com.maty.android.bookshelves.ui.addBook
+package com.maty.android.bookshelves.ui.books.add
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,7 @@ import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
-import com.maty.android.bookshelves.ui.addBook.suggestions.SuggestionAdapter
+import com.maty.android.bookshelves.ui.books.add.suggestions.SuggestionAdapter
 import com.maty.android.bookshelves.ui.books.BookViewModel
 import com.maty.android.bookshelves.ui.books.detail.BookDetailsActivity
 import kotlinx.android.synthetic.main.activity_add_book.*

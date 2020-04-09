@@ -4,7 +4,6 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
-import java.sql.Date
 import java.time.LocalDateTime
 
 data class BookResponse(
@@ -31,18 +30,6 @@ data class BookResponse(
         val authors: List<AuthorResponse> = listOf(),
         val workId: String = "",
         val status: String = ""
-)
-
-data class AuthorResponse(
-        val id: String = "",
-        val name: String = "",
-        val role: String = "",
-        val imageUrl: String = "",
-        val imageUrlSmall: String = "",
-        val link: String = "",
-        val averageRating: Float? = 0f,
-        val ratingsCount: Int? = 0,
-        val textReviewsCount: Int? = 0
 )
 
 //(foreignKeys = [ForeignKey(entity = Author::class,
@@ -78,22 +65,6 @@ data class Book(
         var entryDate: LocalDateTime
 ) : Parcelable
 
-@Entity
-@Parcelize
-data class Author(
-        @PrimaryKey val id: String,
-        val name: String,
-        val role: String,
-        val imageUrl: String,
-        val imageUrlSmall: String,
-        val link: String,
-        val averageRating: Float?,
-        val ratingsCount: Int?,
-        val textReviewsCount: Int?
-) : Parcelable
-
-fun AuthorResponse.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmall, link, averageRating, ratingsCount, textReviewsCount)
-
 fun BookResponse.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
         averageRating, ratingsCount, description, authors[0].name, workId, status, LocalDateTime.now())
@@ -101,5 +72,3 @@ fun BookResponse.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, t
 fun com.intmainreturn00.grapi.Book.mapToBook() = Book(id, isbn, isbn13, textReviewsCount, title, titleWithoutSeries, imageUrl, imageUrlSmall,
         imageUrlLarge, link, numPages, format, publisher, editionInformation, publicationDay, publicationYear, publicationMonth,
         averageRating, ratingsCount, description, authors[0].name, workId, "added", LocalDateTime.now())
-
-fun com.intmainreturn00.grapi.Author.mapToAuthor() = Author(id, name, role, imageUrl, imageUrlSmall, link, averageRating, ratingsCount, textReviewsCount)
