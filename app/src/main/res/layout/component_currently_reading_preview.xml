@@ -39,8 +39,6 @@
             android:orientation="horizontal">
 
             <include layout="@layout/placeholder_currently_reading_preview"/>
-            <include layout="@layout/placeholder_currently_reading_preview"/>
-            <include layout="@layout/placeholder_currently_reading_preview"/>
 
         </LinearLayout>
 

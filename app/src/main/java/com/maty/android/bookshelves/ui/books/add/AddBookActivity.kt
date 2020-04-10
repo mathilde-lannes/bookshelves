@@ -1,18 +1,21 @@
 package com.maty.android.bookshelves.ui.books.add
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
-import com.maty.android.bookshelves.model.Book
 import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
-import com.maty.android.bookshelves.ui.books.add.suggestions.SuggestionAdapter
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
+import com.maty.android.bookshelves.ui.books.add.suggestions.SuggestionAdapter
 import com.maty.android.bookshelves.ui.books.detail.BookDetailsActivity
 import kotlinx.android.synthetic.main.activity_add_book.*
 import kotlinx.coroutines.GlobalScope
@@ -29,11 +32,16 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     initUi()
   }
 
+  override fun onStop() {
+    super.onStop()
+    hideLoading()
+  }
+
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
     val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
 
     if (result != null) {
-
+      showLoading()
       if (result.contents != null) {
         GlobalScope.launch {
           val book = viewModel.findBookByISBN(result.contents)
@@ -57,6 +65,7 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
 
       if (selectedSuggestion != null) {
         GlobalScope.launch {
+          showLoading()
           val book = viewModel.findBookByGRID(selectedSuggestion.bookId)
           onBookAdded(book)
         }
@@ -67,6 +76,7 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
   }
 
   override fun showBookError() {
+    hideLoading()
     autocomplete.error = getString(R.string.book_error)
   }
 
@@ -81,4 +91,32 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
   }
 
   override fun showAddBookError() = showGeneralError(this)
+
+  override fun showLoading() {
+    runOnUiThread {
+      autocomplete.hideKeyboard()
+      autocomplete.visibility = View.GONE
+      or.visibility = View.GONE
+      addBookButton.visibility = View.GONE
+
+      shimmerLayout.startShimmerAnimation()
+      shimmerLayout.visibility = View.VISIBLE
+    }
+  }
+
+  override fun hideLoading() {
+    runOnUiThread {
+      shimmerLayout.stopShimmerAnimation()
+      shimmerLayout.visibility = View.GONE
+
+      autocomplete.visibility = View.VISIBLE
+      or.visibility = View.VISIBLE
+      addBookButton.visibility = View.VISIBLE
+    }
+  }
+
+  private fun View.hideKeyboard() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(windowToken, 0)
+  }
 }

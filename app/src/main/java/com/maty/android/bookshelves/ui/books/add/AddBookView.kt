@@ -11,4 +11,8 @@ interface AddBookView {
   fun showBookError()
 
   fun removeBookError()
+
+  fun showLoading()
+
+  fun hideLoading()
 }
