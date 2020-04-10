@@ -4,13 +4,11 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Html
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.getDominantColor
-import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.*
@@ -32,8 +30,6 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
         val book: Book = intent.getParcelableExtra("book")
         showBook(book)
-
-        initUi()
     }
 
     override fun showBook(book: Book) {
@@ -57,11 +53,44 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
     private fun showBookActions() {
         when(book.status) {
-            KEY_TO_BUY -> toBuyAction.visibility = View.VISIBLE
-            KEY_TO_READ -> toReadAction.visibility = View.VISIBLE
-            KEY_READING -> finishReadingAction.visibility = View.VISIBLE
-            else -> defaultAction.visibility = View.VISIBLE
+            KEY_TO_BUY -> showToBuyActions()
+            KEY_TO_READ -> showToReadActions()
+            KEY_READING -> showFinishReadingActions()
+            else -> showDefaultActions()
         }
+    }
+
+    private fun showDefaultActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.to_read),
+                R.drawable.books
+        ) { registerBook(KEY_TO_READ) }
+
+        floatingActionMenu.initSecondAction(
+                resources.getString(R.string.to_buy),
+                R.drawable.shopping_cart
+        ) { registerBook(KEY_TO_BUY) }
+    }
+
+    private fun showToBuyActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.move_to_read),
+                R.drawable.books
+        ) { updateBook(KEY_TO_READ) }
+    }
+
+    private fun showToReadActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.start_reading),
+                R.drawable.books
+        ) { updateBook(KEY_READING) }
+    }
+
+    private fun showFinishReadingActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.finish_reading),
+                R.drawable.books
+        ) { updateBook(KEY_ALREADY_READ) }
     }
 
     private fun registerBook(status : String) {
@@ -73,14 +102,6 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         this.book.status = status
         viewModel.update(this.book)
         redirectToHomepage()
-    }
-
-    private fun initUi() {
-        toReadButton.onClick { registerBook(KEY_TO_READ) }
-        moveToReadButton.onClick { updateBook(KEY_TO_READ) }
-        toBuyButton.onClick { registerBook(KEY_TO_BUY) }
-        startReadingButton.onClick { updateBook(KEY_READING) }
-        finishReadingButton.onClick { updateBook(KEY_ALREADY_READ) }
     }
 
     override fun redirectToHomepage() {

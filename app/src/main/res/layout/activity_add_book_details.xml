@@ -34,93 +34,11 @@
             android:padding="30dp" />
     </ScrollView>
 
-
-    <RelativeLayout
-        android:id="@+id/defaultAction"
+    <com.maty.android.bookshelves.ui.books.all.FloatingActionMenuComponent
+        android:id="@+id/floatingActionMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/toReadButton"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableTop="@drawable/books"
-            android:text="@string/to_read"
-            style="@style/ButtonWithIconTheme"
-            />
-
-        <Button
-            android:id="@+id/toBuyButton"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableTop="@drawable/shopping_cart"
-            android:text="@string/to_buy"
-            style="@style/ButtonWithIconTheme"
-            android:layout_toEndOf="@id/toReadButton"
-            />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/toReadAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/startReadingButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableTop="@drawable/books"
-            android:text="@string/start_reading"
-            style="@style/ButtonWithIconTheme" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/toBuyAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/moveToReadButton"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableTop="@drawable/books"
-            android:text="@string/move_to_read"
-            style="@style/ButtonWithIconTheme" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/finishReadingAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/finishReadingButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:drawableTint="@color/colorPrimary"
-            android:drawableTop="@drawable/books"
-            android:text="@string/finish_reading"
-            style="@style/ButtonWithIconTheme" />
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

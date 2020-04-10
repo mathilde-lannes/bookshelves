@@ -9,7 +9,8 @@ import com.maty.android.bookshelves.data.BookDb
 import com.maty.android.bookshelves.ioThread
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.model.mapToBook
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 
 const val NB_PREVIEW_COLLECTION = 5
@@ -46,6 +47,7 @@ class BookViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun update(book: Book) = ioThread {
+        book.entryDate = LocalDateTime.now()
         dao.update(book)
     }
 
