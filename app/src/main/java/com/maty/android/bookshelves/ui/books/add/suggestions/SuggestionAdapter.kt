@@ -66,7 +66,7 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
                     val suggs = grapi.getSearchResults(queryString).results
 
                     if (autocomplete.text.toString() == charSequence) {
-                        filterResults.values = suggs
+                        filterResults.values = suggs.take(5)
                     }
                 }
                 return filterResults
