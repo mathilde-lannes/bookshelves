@@ -30,6 +30,7 @@ class BookAdapter() : RecyclerView.Adapter<BookHolder>() {
   }
 
   fun addBooks(books: List<Book>) {
+    items.clear()
     books.forEach { addBook(it) }
   }
 }

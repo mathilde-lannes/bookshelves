@@ -1,18 +1,25 @@
 package com.maty.android.bookshelves.ui.books.detail
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Html
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.maty.android.bookshelves.R
+import com.maty.android.bookshelves.common.getDominantColor
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.*
 import com.maty.android.bookshelves.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_add_book_details.*
+import kotlinx.android.synthetic.main.item_currently_reading_preview.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 
 class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
@@ -31,9 +38,19 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
     override fun showBook(book: Book) {
         this.book = book
-        bookTitle.text = book.title
-        bookAuthor.text = book.author?.name
+        bookPreview.title.text = book.title
+        bookPreview.author.text = book.author?.name
         bookDescription.text = Html.fromHtml(book.description, Html.FROM_HTML_MODE_LEGACY)
+        Glide.with(applicationContext).load(book.imageUrl).into(bookPreview.cover)
+
+        GlobalScope.launch {
+            val bitmap: Bitmap = Glide.with(applicationContext)
+                    .asBitmap()
+                    .load(book.imageUrl)
+                    .submit().get()
+
+            coloredBackground.setBackgroundColor(getDominantColor(bitmap))
+        }
 
         showBookActions()
     }
