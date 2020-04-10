@@ -2,14 +2,14 @@ package com.maty.android.bookshelves.ui.books.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.common.showGeneralError
-import com.maty.android.bookshelves.ui.books.BookViewModel
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.*
 import com.maty.android.bookshelves.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_add_book_details.*
@@ -33,7 +33,7 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         this.book = book
         bookTitle.text = book.title
         bookAuthor.text = book.author?.name
-        bookDescription.text = book.description
+        bookDescription.text = Html.fromHtml(book.description, Html.FROM_HTML_MODE_LEGACY)
 
         showBookActions()
     }
