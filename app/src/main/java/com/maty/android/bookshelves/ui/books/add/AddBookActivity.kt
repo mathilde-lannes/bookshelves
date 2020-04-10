@@ -57,6 +57,7 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     addBookButton.onClick { viewModel.scanBarcode(this) }
 
     val adapter = SuggestionAdapter(this, R.layout.item_suggestion, listOf())
+    adapter.setView(autocomplete)
     autocomplete.setAdapter(adapter)
 
     autocomplete.setOnItemClickListener { parent, _, position, _ ->

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.annotation.LayoutRes
@@ -12,13 +13,13 @@ import com.bumptech.glide.Glide
 import com.intmainreturn00.grapi.SearchResult
 import com.intmainreturn00.grapi.grapi
 import kotlinx.android.synthetic.main.item_suggestion.view.*
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
 class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource: Int, private val allSuggestions: List<SearchResult>):
         ArrayAdapter<SearchResult>(context, layoutResource, allSuggestions),
         Filterable {
     private var suggestions: List<SearchResult> = allSuggestions
+    private lateinit var autocomplete: EditText
 
     override fun getCount(): Int {
         return suggestions.size
@@ -29,7 +30,6 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
 
     }
     override fun getItemId(p0: Int): Long {
-        // Or just return p0
         return suggestions[p0].workId.toLong()
     }
 
@@ -41,6 +41,10 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
         Glide.with(context).load(suggestion.imageUrl).into(view.cover)
 
         return view
+    }
+
+    fun setView(view : EditText) {
+        autocomplete = view
     }
 
     override fun getFilter(): Filter {
@@ -59,8 +63,11 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
                 }
 
                 runBlocking {
-                    val sugg = async { grapi.getSearchResults(queryString).results }
-                    filterResults.values = sugg.await()
+                    val suggs = grapi.getSearchResults(queryString).results
+
+                    if (autocomplete.text.toString() == charSequence) {
+                        filterResults.values = suggs
+                    }
                 }
                 return filterResults
             }
