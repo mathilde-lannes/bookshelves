@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
 import com.google.zxing.integration.android.IntentIntegrator
 import com.google.zxing.integration.android.IntentResult
 import com.intmainreturn00.grapi.SearchResult
@@ -57,8 +58,13 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     addBookButton.onClick { viewModel.scanBarcode(this) }
 
     val adapter = SuggestionAdapter(this, R.layout.item_suggestion, listOf())
-    adapter.setView(autocomplete)
+    adapter.setViews(autocomplete, progressBar)
     autocomplete.setAdapter(adapter)
+
+    autocomplete.doAfterTextChanged {
+      if (autocomplete.text.toString().length > 3)
+        progressBar.visibility = View.VISIBLE
+    }
 
     autocomplete.setOnItemClickListener { parent, _, position, _ ->
       val selectedSuggestion = parent.adapter.getItem(position) as SearchResult?

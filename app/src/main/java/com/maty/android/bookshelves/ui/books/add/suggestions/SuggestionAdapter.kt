@@ -4,10 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.Filter
-import android.widget.Filterable
+import android.widget.*
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.intmainreturn00.grapi.SearchResult
@@ -20,6 +17,7 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
         Filterable {
     private var suggestions: List<SearchResult> = allSuggestions
     private lateinit var autocomplete: EditText
+    private lateinit var mLoadingIndicator: ProgressBar
 
     override fun getCount(): Int {
         return suggestions.size
@@ -43,8 +41,9 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
         return view
     }
 
-    fun setView(view : EditText) {
+    fun setViews(view : EditText, progressBar : ProgressBar) {
         autocomplete = view
+        mLoadingIndicator = progressBar
     }
 
     override fun getFilter(): Filter {
@@ -52,6 +51,7 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
             override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults) {
                 suggestions = if (filterResults.values != null) filterResults.values as List<SearchResult> else listOf()
                 notifyDataSetChanged()
+                mLoadingIndicator.visibility = View.GONE
             }
 
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
