@@ -11,6 +11,7 @@ import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.model.mapToBook
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 import java.time.LocalDateTime
 
 const val NB_PREVIEW_COLLECTION = 5
@@ -25,11 +26,6 @@ const val KEY_TO_BUY = "buy"
  */
 class BookViewModel(app: Application) : AndroidViewModel(app) {
     private val dao = BookDb.get(app).bookDao()
-
-    val booksToRead = dao.booksByStatus(KEY_TO_READ)
-    val booksToBuy = dao.booksByStatus(KEY_TO_BUY)
-    val booksAlreadyRead = dao.booksByStatus(KEY_ALREADY_READ)
-    val booksCurrentlyReading = dao.booksByStatus(KEY_READING)
 
     val booksToReadPreview = dao.booksByStatus(KEY_TO_READ, NB_PREVIEW_COLLECTION)
     val booksToBuyPreview = dao.booksByStatus(KEY_TO_BUY, NB_PREVIEW_COLLECTION)
@@ -67,5 +63,19 @@ class BookViewModel(app: Application) : AndroidViewModel(app) {
         run {
             IntentIntegrator(activity).initiateScan()
         }
+    }
+
+    suspend fun getThumbnail(query : String) : String {
+        return withContext(Dispatchers.IO) {
+           getImageFromGoogle(query)
+        }
+    }
+
+    private fun getImageFromGoogle(query : String) : String {
+        val doc = Jsoup.connect("https://www.google.com/search?tbm=isch&q=$query")
+                .userAgent("Mozilla")
+                .get()
+        val img = doc.select("img")[4]
+        return img.attr("src")
     }
 }

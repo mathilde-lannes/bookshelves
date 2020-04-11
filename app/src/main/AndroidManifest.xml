@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.maty.android.bookshelves">
+  <uses-permission android:name="android.permission.INTERNET"/>
 
   <application
       android:name="com.maty.android.bookshelves.App"
@@ -30,12 +31,12 @@
 
     <activity
         android:name="com.maty.android.bookshelves.ui.books.add.AddBookActivity"
-        android:screenOrientation="portrait"
+        android:screenOrientation="fullSensor"
         android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
 
     <activity
         android:name="com.maty.android.bookshelves.ui.main.MainActivity"
-        android:screenOrientation="portrait"
+        android:screenOrientation="fullSensor"
         android:theme="@style/MainTheme"/>
       <activity android:name=".ui.books.detail.BookDetailsActivity" />
   </application>
