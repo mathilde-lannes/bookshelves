@@ -4,21 +4,20 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Filter
-import android.widget.Filterable
+import android.widget.*
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import com.intmainreturn00.grapi.SearchResult
 import com.intmainreturn00.grapi.grapi
 import kotlinx.android.synthetic.main.item_suggestion.view.*
-import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 
 class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource: Int, private val allSuggestions: List<SearchResult>):
         ArrayAdapter<SearchResult>(context, layoutResource, allSuggestions),
         Filterable {
     private var suggestions: List<SearchResult> = allSuggestions
+    private lateinit var autocomplete: EditText
+    private lateinit var mLoadingIndicator: ProgressBar
 
     override fun getCount(): Int {
         return suggestions.size
@@ -29,7 +28,6 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
 
     }
     override fun getItemId(p0: Int): Long {
-        // Or just return p0
         return suggestions[p0].workId.toLong()
     }
 
@@ -43,11 +41,17 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
         return view
     }
 
+    fun setViews(view : EditText, progressBar : ProgressBar) {
+        autocomplete = view
+        mLoadingIndicator = progressBar
+    }
+
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun publishResults(charSequence: CharSequence?, filterResults: FilterResults) {
                 suggestions = if (filterResults.values != null) filterResults.values as List<SearchResult> else listOf()
                 notifyDataSetChanged()
+                mLoadingIndicator.visibility = View.GONE
             }
 
             override fun performFiltering(charSequence: CharSequence?): FilterResults {
@@ -59,8 +63,11 @@ class SuggestionAdapter(context: Context, @LayoutRes private val layoutResource:
                 }
 
                 runBlocking {
-                    val sugg = async { grapi.getSearchResults(queryString).results }
-                    filterResults.values = sugg.await()
+                    val suggs = grapi.getSearchResults(queryString).results
+
+                    if (autocomplete.text.toString() == charSequence) {
+                        filterResults.values = suggs.take(5)
+                    }
                 }
                 return filterResults
             }

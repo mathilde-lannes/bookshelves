@@ -1,18 +1,23 @@
 package com.maty.android.bookshelves.ui.books.detail
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.View
+import android.text.Html
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.maty.android.bookshelves.model.Book
+import com.bumptech.glide.Glide
 import com.maty.android.bookshelves.R
-import com.maty.android.bookshelves.common.onClick
+import com.maty.android.bookshelves.common.getDominantColor
 import com.maty.android.bookshelves.common.showGeneralError
-import com.maty.android.bookshelves.ui.books.BookViewModel
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.*
 import com.maty.android.bookshelves.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_add_book_details.*
+import kotlinx.android.synthetic.main.item_currently_reading_preview.view.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 
 class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
@@ -25,26 +30,67 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
         val book: Book = intent.getParcelableExtra("book")
         showBook(book)
-
-        initUi()
     }
 
     override fun showBook(book: Book) {
         this.book = book
-        bookTitle.text = book.title
-        bookAuthor.text = book.author?.name
-        bookDescription.text = book.description
+        bookPreview.title.text = book.title
+        bookPreview.author.text = book.author?.name
+        bookDescription.text = Html.fromHtml(book.description, Html.FROM_HTML_MODE_LEGACY)
+        Glide.with(applicationContext).load(book.imageUrl).into(bookPreview.cover)
+
+        GlobalScope.launch {
+            val bitmap: Bitmap = Glide.with(applicationContext)
+                    .asBitmap()
+                    .load(book.imageUrl)
+                    .submit().get()
+
+            coloredBackground.setBackgroundColor(getDominantColor(bitmap))
+        }
 
         showBookActions()
     }
 
     private fun showBookActions() {
         when(book.status) {
-            KEY_TO_BUY -> toBuyAction.visibility = View.VISIBLE
-            KEY_TO_READ -> toReadAction.visibility = View.VISIBLE
-            KEY_READING -> finishReadingAction.visibility = View.VISIBLE
-            else -> defaultAction.visibility = View.VISIBLE
+            KEY_TO_BUY -> showToBuyActions()
+            KEY_TO_READ -> showToReadActions()
+            KEY_READING -> showFinishReadingActions()
+            else -> showDefaultActions()
         }
+    }
+
+    private fun showDefaultActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.to_read),
+                R.drawable.books
+        ) { registerBook(KEY_TO_READ) }
+
+        floatingActionMenu.initSecondAction(
+                resources.getString(R.string.to_buy),
+                R.drawable.shopping_cart
+        ) { registerBook(KEY_TO_BUY) }
+    }
+
+    private fun showToBuyActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.move_to_read),
+                R.drawable.books
+        ) { updateBook(KEY_TO_READ) }
+    }
+
+    private fun showToReadActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.start_reading),
+                R.drawable.books
+        ) { updateBook(KEY_READING) }
+    }
+
+    private fun showFinishReadingActions() {
+        floatingActionMenu.initFirstAction(
+                resources.getString(R.string.finish_reading),
+                R.drawable.books
+        ) { updateBook(KEY_ALREADY_READ) }
     }
 
     private fun registerBook(status : String) {
@@ -56,14 +102,6 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         this.book.status = status
         viewModel.update(this.book)
         redirectToHomepage()
-    }
-
-    private fun initUi() {
-        toReadButton.onClick { registerBook(KEY_TO_READ) }
-        moveToReadButton.onClick { updateBook(KEY_TO_READ) }
-        toBuyButton.onClick { registerBook(KEY_TO_BUY) }
-        startReadingButton.onClick { updateBook(KEY_READING) }
-        finishReadingButton.onClick { updateBook(KEY_ALREADY_READ) }
     }
 
     override fun redirectToHomepage() {

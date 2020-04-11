@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/cover"
@@ -10,9 +11,11 @@
         android:layout_height="190dp"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
+        android:background="@color/placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/book_cover" />
 
     <TextView
         android:id="@+id/title"
@@ -20,8 +23,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/cover"
         android:textAlignment="center"
+        tools:text="Les pâturages du ciel"
         style="@style/LabelTheme"
-        android:textSize="16dp"/>
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/author"
@@ -29,6 +33,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/title"
         android:textAlignment="center"
-        android:textSize="16dp"/>
+        tools:text="John Steinbeck"
+        android:textSize="16sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

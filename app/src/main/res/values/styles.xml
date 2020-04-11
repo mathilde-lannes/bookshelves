@@ -5,7 +5,8 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
-      <item name="android:fontFamily">@font/eina_01_regular</item>
+    <item name="android:fontFamily">@font/eina_01_regular</item>
+    <item name="android:windowTranslucentStatus">true</item>
   </style>
 
     <style name="LabelTheme" parent="@android:style/TextAppearance.Medium">
