@@ -84,4 +84,22 @@
         app:pressedTranslationZ="12dp"
         app:srcCompat="@drawable/ic_add_book" />
 
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/onlyAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="32dp"
+        android:background="@color/colorAccent"
+        tools:text="Start reading"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:pressedTranslationZ="12dp"
+        app:srcCompat="@drawable/ic_add_book" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

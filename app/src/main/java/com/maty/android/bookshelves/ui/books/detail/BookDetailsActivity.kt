@@ -79,36 +79,39 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
     }
 
     private fun showDefaultActions() {
-        floatingActionMenu.initFirstAction(
-                resources.getString(R.string.to_read),
-                R.drawable.books
-        ) { registerBook(KEY_TO_READ) }
-
-        floatingActionMenu.initSecondAction(
-                resources.getString(R.string.to_buy),
-                R.drawable.shopping_cart
-        ) { registerBook(KEY_TO_BUY) }
+        floatingActionMenu
+            .setFirstAction(
+                    resources.getString(R.string.to_read), R.drawable.books
+            ) { registerBook(KEY_TO_READ) }
+            .setSecondAction(
+                resources.getString(R.string.to_buy), R.drawable.shopping_cart
+            ) { registerBook(KEY_TO_BUY) }
+            .build()
     }
 
     private fun showToBuyActions() {
-        floatingActionMenu.initFirstAction(
-                resources.getString(R.string.move_to_read),
-                R.drawable.books
-        ) { updateBook(KEY_TO_READ) }
+        floatingActionMenu
+            .setFirstAction(
+                resources.getString(R.string.move_to_read), R.drawable.books
+            ) { updateBook(KEY_TO_READ) }
+            .build()
     }
 
     private fun showToReadActions() {
-        floatingActionMenu.initFirstAction(
-                resources.getString(R.string.start_reading),
-                R.drawable.books
-        ) { updateBook(KEY_READING) }
+        floatingActionMenu
+            .setFirstAction(
+                resources.getString(R.string.start_reading), R.drawable.books
+            ) { updateBook(KEY_READING) }
+            .build()
     }
 
     private fun showFinishReadingActions() {
-        floatingActionMenu.initFirstAction(
+        floatingActionMenu
+            .setFirstAction(
                 resources.getString(R.string.finish_reading),
                 R.drawable.books
-        ) { updateBook(KEY_ALREADY_READ) }
+            ) { updateBook(KEY_ALREADY_READ) }
+            .build()
     }
 
     private fun registerBook(status : String) {

@@ -16,32 +16,49 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
         attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
 
-    var isOpen = false
-    var hasFirstAction = false
-    var hasSecondAction = false
+    private var isOpen = false
+    private var hasFirstAction = false
+    private var hasSecondAction = false
 
     init {
         LayoutInflater.from(context).inflate(R.layout.floating_action_menu, this, true)
-        addHandlers()
     }
 
-    fun initFirstAction(title : String, icon : Int, onClick : () -> Unit) {
+    fun build() {
+        if (!hasFirstAction) {
+            throw IllegalStateException("You need to set at least one action before building the component.")
+        }
+        if (!hasSecondAction) {
+            onlyAction.visibility = View.VISIBLE
+            mainAction.visibility = View.GONE
+        } else {
+            addHandlersForMultipleActions()
+        }
+    }
+
+    fun setFirstAction(title : String, icon : Int, onClick : () -> Unit): FloatingActionMenuComponent {
         hasFirstAction = true
         subAction1Title.text = title
         subAction1.setImageResource(icon)
         subAction1.onClick { onClick() }
 
+        onlyAction.text = title
+        onlyAction.icon = resources.getDrawable(icon, null)
+        onlyAction.onClick { onClick() }
+
+        return this
     }
 
-    fun initSecondAction(title : String, icon : Int, onClick : () -> Unit) {
+    fun setSecondAction(title : String, icon : Int, onClick : () -> Unit): FloatingActionMenuComponent {
         hasSecondAction = true
         subAction2Title.text = title
         subAction2.setImageResource(icon)
         subAction2.onClick { onClick() }
 
+        return this
     }
 
-    private fun addHandlers() {
+    private fun addHandlersForMultipleActions() {
         val closeAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_close);
         val openAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_open);
         val clockAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_clock);
@@ -49,32 +66,24 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
 
         mainAction.setOnClickListener {
             if (isOpen) {
-                if (hasSecondAction) {
-                    subAction2Title.visibility = View.INVISIBLE
-                    subAction2.startAnimation(closeAnimation)
-                    subAction2.isClickable = false
-                }
+                subAction2Title.visibility = View.INVISIBLE
+                subAction2.startAnimation(closeAnimation)
+                subAction2.isClickable = false
 
-                if (hasFirstAction) {
-                    subAction1Title.visibility = View.INVISIBLE
-                    subAction1.startAnimation(closeAnimation)
-                    subAction1.isClickable = false
-                }
+                subAction1Title.visibility = View.INVISIBLE
+                subAction1.startAnimation(closeAnimation)
+                subAction1.isClickable = false
 
                 mainAction.startAnimation(antiClockAnimation)
                 isOpen = false
             } else {
-                if (hasSecondAction) {
-                    subAction2Title.visibility = View.VISIBLE
-                    subAction2.startAnimation(openAnimation)
-                    subAction2.isClickable = true
-                }
+                subAction2Title.visibility = View.VISIBLE
+                subAction2.startAnimation(openAnimation)
+                subAction2.isClickable = true
 
-                if (hasFirstAction) {
-                    subAction1Title.visibility = View.VISIBLE
-                    subAction1.startAnimation(openAnimation)
-                    subAction1.isClickable = true
-                }
+                subAction1Title.visibility = View.VISIBLE
+                subAction1.startAnimation(openAnimation)
+                subAction1.isClickable = true
 
                 mainAction.startAnimation(clockAnimation)
                 isOpen = true
