@@ -32,15 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     mainPager.adapter = adapter
     mainPager.offscreenPageLimit = 1
-    mainPager.isUserInputEnabled = false;
-    bottomNavigation.setOnNavigationItemSelectedListener {
-      switchNavigationTab(it.order)
-      mainPager.currentItem = it.order
-      true
-    }
+    mainPager.isUserInputEnabled = false
 
     addBook.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
   }
-
-  private fun switchNavigationTab(position: Int) = mainPager.setCurrentItem(position, true)
 }
