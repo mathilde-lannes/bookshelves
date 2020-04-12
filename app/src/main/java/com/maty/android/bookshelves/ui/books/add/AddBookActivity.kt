@@ -13,7 +13,6 @@ import com.google.zxing.integration.android.IntentResult
 import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.onClick
-import com.maty.android.bookshelves.common.showGeneralError
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
 import com.maty.android.bookshelves.ui.books.add.suggestions.SuggestionAdapter
@@ -87,7 +86,7 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     autocomplete.error = getString(R.string.book_error)
   }
 
-  override fun removeBookError() {
+  fun removeBookError() {
     autocomplete.error = null
   }
 
@@ -96,8 +95,6 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     intent.putExtra("book", book)
     startActivity(intent)
   }
-
-  override fun showAddBookError() = showGeneralError(this)
 
   override fun showLoading() {
     runOnUiThread {
