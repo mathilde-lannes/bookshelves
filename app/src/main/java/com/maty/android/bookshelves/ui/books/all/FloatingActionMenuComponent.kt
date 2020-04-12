@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.floating_action_menu.view.*
 class FloatingActionMenuComponent @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null
-) : ConstraintLayout(context, attrs) {
+) : ConstraintLayout(context, attrs), FloatingActionMenuView {
 
     private var isOpen = false
     private var hasFirstAction = false
@@ -24,7 +24,7 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
         LayoutInflater.from(context).inflate(R.layout.floating_action_menu, this, true)
     }
 
-    fun build() {
+    override fun build() {
         if (!hasFirstAction) {
             throw IllegalStateException("You need to set at least one action before building the component.")
         }
@@ -36,7 +36,7 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
         }
     }
 
-    fun setFirstAction(title : String, icon : Int, onClick : () -> Unit): FloatingActionMenuComponent {
+    override fun setFirstAction(title : String, icon : Int, onClick : () -> Unit): FloatingActionMenuView {
         hasFirstAction = true
         subAction1Title.text = title
         subAction1.setImageResource(icon)
@@ -49,7 +49,7 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
         return this
     }
 
-    fun setSecondAction(title : String, icon : Int, onClick : () -> Unit): FloatingActionMenuComponent {
+    override fun setSecondAction(title : String, icon : Int, onClick : () -> Unit): FloatingActionMenuView {
         hasSecondAction = true
         subAction2Title.text = title
         subAction2.setImageResource(icon)
@@ -86,7 +86,7 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
 
     }
 
-    fun hide() {
+    override fun hide() {
         if (!hasSecondAction) {
             onlyAction.hide()
         } else {
@@ -103,11 +103,11 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
         }
     }
 
-    fun show() {
+    override fun show() {
         if (hasSecondAction)  mainAction.show() else onlyAction.show()
     }
 
-    fun close() {
+    override fun close() {
         if (hasSecondAction) {
             subAction2Title.visibility = View.INVISIBLE
             subAction2.hide()
