@@ -73,10 +73,10 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
                 mainAction.startAnimation(antiClockAnimation)
                 isOpen = false
             } else {
-                subAction2Title.visibility = View.VISIBLE
+                if (subAction2Title.text.toString().isNotEmpty()) subAction2Title.visibility = View.VISIBLE
                 subAction2.show()
 
-                subAction1Title.visibility = View.VISIBLE
+                if (subAction1Title.text.toString().isNotEmpty()) subAction1Title.visibility = View.VISIBLE
                 subAction1.show()
 
                 mainAction.startAnimation(clockAnimation)

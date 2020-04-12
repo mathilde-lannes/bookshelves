@@ -25,13 +25,13 @@
         android:textStyle="bold"/>
 
     <ImageView
-        android:id="@+id/addBook"
+        android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|center_vertical"
         android:padding="16dp"
         android:tint="@color/colorPrimaryDark"
-        app:srcCompat="@drawable/ic_add_book"
+        app:srcCompat="@drawable/ic_search"
         android:contentDescription="@string/add_book" />
   </FrameLayout>
 

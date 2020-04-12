@@ -14,6 +14,7 @@ import com.google.zxing.integration.android.IntentResult
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
+import com.maty.android.bookshelves.ui.books.add.AddBookActivity
 import com.maty.android.bookshelves.ui.books.add.AddBookView
 import com.maty.android.bookshelves.ui.books.detail.BookDetailsActivity
 import kotlinx.android.synthetic.main.fragment_books.*
@@ -44,6 +45,7 @@ class AllBooksFragment : Fragment(), AddBookView {
 
   override fun onStop() {
     super.onStop()
+    floatingActionMenu.close()
     hideLoading()
   }
 
@@ -78,16 +80,17 @@ class AllBooksFragment : Fragment(), AddBookView {
   private fun initMenu() {
     floatingActionMenu
         .setFirstAction(
-                resources.getString(R.string.scan_barcode), R.drawable.books
+                "", R.drawable.ic_barcode
         ) { openBarcodeScanner() }
         .setSecondAction(
-                resources.getString(R.string.search), R.drawable.shopping_cart
+                "", R.drawable.ic_search
         ) { startSearching() }
         .build()
   }
 
   private fun startSearching() {
     floatingActionMenu.hide()
+    startActivity(Intent(requireContext(), AddBookActivity::class.java))
   }
 
   private fun openBarcodeScanner() {

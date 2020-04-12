@@ -34,6 +34,6 @@ class MainActivity : AppCompatActivity() {
     mainPager.offscreenPageLimit = 1
     mainPager.isUserInputEnabled = false
 
-    addBook.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
+    search.onClick { startActivity(Intent(this, AddBookActivity::class.java)) }
   }
 }

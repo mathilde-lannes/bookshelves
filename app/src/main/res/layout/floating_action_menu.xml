@@ -9,6 +9,7 @@
         android:id="@+id/subAction2Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TitleTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="186dp"
@@ -33,13 +34,14 @@
         android:focusable="true"
         tools:visibility="visible"
         android:visibility="invisible"
-        app:backgroundTint="#ffffff"
+        app:backgroundTint="@color/colorAccentSecond"
         app:pressedTranslationZ="12dp"/>
 
     <TextView
         android:id="@+id/subAction1Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/TitleTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="116dp"
@@ -65,7 +67,7 @@
         android:focusable="true"
         tools:visibility="visible"
         android:visibility="invisible"
-        app:backgroundTint="#ffffff"
+        app:backgroundTint="@color/colorAccentSecond"
         app:pressedTranslationZ="12dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
