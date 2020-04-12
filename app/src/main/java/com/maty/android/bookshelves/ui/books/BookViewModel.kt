@@ -2,9 +2,12 @@ package com.maty.android.bookshelves.ui.books
 
 import android.app.Activity
 import android.app.Application
+import android.database.sqlite.SQLiteConstraintException
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.AndroidViewModel
 import com.google.zxing.integration.android.IntentIntegrator
 import com.intmainreturn00.grapi.grapi
+import com.maty.android.bookshelves.common.BookAlreadySaved
 import com.maty.android.bookshelves.data.BookDb
 import com.maty.android.bookshelves.ioThread
 import com.maty.android.bookshelves.model.Book
@@ -39,7 +42,12 @@ class BookViewModel(app: Application) : AndroidViewModel(app) {
     fun insert(book: Book, status : String) = ioThread {
         book.status = status
         book.entryDate = LocalDateTime.now()
-        dao.insert(book)
+
+        try {
+            dao.insert(book)
+        } catch (e : SQLiteConstraintException) {
+            throw BookAlreadySaved("You've already registered this book", e)
+        }
     }
 
     fun update(book: Book) = ioThread {
@@ -59,9 +67,15 @@ class BookViewModel(app: Application) : AndroidViewModel(app) {
         grapi.getBookByGRID(id).mapToBook()
     }
 
-    fun scanBarcode(activity : Activity) {
+    fun scanBarcode(activity: Activity) {
         run {
             IntentIntegrator(activity).initiateScan()
+        }
+    }
+
+    fun scanBarcode(fragment : Fragment) {
+        run {
+            IntentIntegrator.forSupportFragment(fragment).initiateScan()
         }
     }
 

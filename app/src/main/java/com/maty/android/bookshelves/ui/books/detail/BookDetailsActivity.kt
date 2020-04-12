@@ -4,10 +4,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Html
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.maty.android.bookshelves.R
+import com.maty.android.bookshelves.common.BookAlreadySaved
 import com.maty.android.bookshelves.common.getDominantColor
 import com.maty.android.bookshelves.common.showGeneralError
 import com.maty.android.bookshelves.model.Book
@@ -115,8 +117,15 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
     }
 
     private fun registerBook(status : String) {
-        viewModel.insert(this.book, status)
-        redirectToHomepage()
+        try {
+            viewModel.insert(this.book, status)
+            redirectToHomepage()
+        } catch (e : BookAlreadySaved) {
+            val duration = Toast.LENGTH_LONG
+            val toast = Toast.makeText(this, e.message, duration)
+            floatingActionMenu.close()
+            toast.show()
+        }
     }
 
     private fun updateBook(status : String) {

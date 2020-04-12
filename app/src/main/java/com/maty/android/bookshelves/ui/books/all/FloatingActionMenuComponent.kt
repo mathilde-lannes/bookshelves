@@ -106,4 +106,17 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
     fun show() {
         if (hasSecondAction)  mainAction.show() else onlyAction.show()
     }
+
+    fun close() {
+        if (hasSecondAction) {
+            subAction2Title.visibility = View.INVISIBLE
+            subAction2.hide()
+
+            subAction1Title.visibility = View.INVISIBLE
+            subAction1.hide()
+
+            mainAction.startAnimation(AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_anticlock))
+            isOpen = false
+        }
+    }
 }
