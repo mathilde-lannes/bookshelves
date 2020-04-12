@@ -59,36 +59,51 @@ class FloatingActionMenuComponent @JvmOverloads constructor(
     }
 
     private fun addHandlersForMultipleActions() {
-        val closeAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_close);
-        val openAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_open);
-        val clockAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_clock);
-        val antiClockAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_anticlock);
+        val clockAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_clock)
+        val antiClockAnimation = AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_anticlock)
 
         mainAction.setOnClickListener {
             if (isOpen) {
                 subAction2Title.visibility = View.INVISIBLE
-                subAction2.startAnimation(closeAnimation)
-                subAction2.isClickable = false
+                subAction2.hide()
 
                 subAction1Title.visibility = View.INVISIBLE
-                subAction1.startAnimation(closeAnimation)
-                subAction1.isClickable = false
+                subAction1.hide()
 
                 mainAction.startAnimation(antiClockAnimation)
                 isOpen = false
             } else {
                 subAction2Title.visibility = View.VISIBLE
-                subAction2.startAnimation(openAnimation)
-                subAction2.isClickable = true
+                subAction2.show()
 
                 subAction1Title.visibility = View.VISIBLE
-                subAction1.startAnimation(openAnimation)
-                subAction1.isClickable = true
+                subAction1.show()
 
                 mainAction.startAnimation(clockAnimation)
                 isOpen = true
             }
         }
 
+    }
+
+    fun hide() {
+        if (!hasSecondAction) {
+            onlyAction.hide()
+        } else {
+            if (isOpen) {
+                mainAction.startAnimation(AnimationUtils.loadAnimation(context.applicationContext, R.anim.fab_rotate_anticlock))
+                isOpen = false
+            }
+
+            mainAction.hide()
+            subAction1Title.visibility = View.GONE
+            subAction1.hide()
+            subAction2Title.visibility = View.GONE
+            subAction2.hide()
+        }
+    }
+
+    fun show() {
+        if (hasSecondAction)  mainAction.show() else onlyAction.show()
     }
 }

@@ -1,43 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     app:layout_constraintTop_toTopOf="parent"
     >
-  <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+        <com.maty.android.bookshelves.ui.books.all.CurrentlyReadingPreviewComponent
+            android:id="@+id/booklist_preview_currently_reading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <com.maty.android.bookshelves.ui.books.all.BooklistPreviewComponent
+            android:id="@+id/booklist_preview_to_read"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:booklist_title="@string/books_to_read"
+            app:layout_constraintTop_toBottomOf="@id/booklist_preview_currently_reading"/>
+
+        <com.maty.android.bookshelves.ui.books.all.BooklistPreviewComponent
+            android:id="@+id/booklist_preview_to_buy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:booklist_title="@string/books_to_buy"
+            app:layout_constraintTop_toBottomOf="@id/booklist_preview_to_read"/>
+
+        <com.maty.android.bookshelves.ui.books.all.BooklistPreviewComponent
+            android:id="@+id/booklist_preview_already_read"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:booklist_title="@string/books_already_read"
+            app:layout_constraintTop_toBottomOf="@id/booklist_preview_to_buy"/>
+
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+  <com.maty.android.bookshelves.ui.books.all.FloatingActionMenuComponent
+      android:id="@+id/floatingActionMenu"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content">
-
-    <com.maty.android.bookshelves.ui.books.all.CurrentlyReadingPreviewComponent
-        android:id="@+id/booklist_preview_currently_reading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <com.maty.android.bookshelves.ui.books.all.BooklistPreviewComponent
-        android:id="@+id/booklist_preview_to_read"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:booklist_title="@string/books_to_read"
-        app:layout_constraintTop_toBottomOf="@id/booklist_preview_currently_reading"/>
-
-    <com.maty.android.bookshelves.ui.books.all.BooklistPreviewComponent
-        android:id="@+id/booklist_preview_to_buy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:booklist_title="@string/books_to_buy"
-        app:layout_constraintTop_toBottomOf="@id/booklist_preview_to_read"/>
-
-    <com.maty.android.bookshelves.ui.books.all.BooklistPreviewComponent
-        android:id="@+id/booklist_preview_already_read"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:booklist_title="@string/books_already_read"
-        app:layout_constraintTop_toBottomOf="@id/booklist_preview_to_buy"/>
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+      android:layout_height="match_parent"
+      app:layout_anchor="@id/scrollView"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

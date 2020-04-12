@@ -42,4 +42,5 @@
   <string name="no_books_currently_reading_title">You\'re not currently reading a book.</string>
   <string name="no_books_currently_reading_subtitle">Try starting reading a book !</string>
   <string name="book_cover">Book cover</string>
+  <string name="search">Search</string>
 </resources>
