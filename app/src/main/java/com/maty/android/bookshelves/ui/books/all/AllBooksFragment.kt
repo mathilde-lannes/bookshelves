@@ -1,19 +1,27 @@
 package com.maty.android.bookshelves.ui.books.all
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.integration.android.IntentResult
 import com.maty.android.bookshelves.R
+import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
-import kotlinx.android.synthetic.main.activity_add_book_details.floatingActionMenu
+import com.maty.android.bookshelves.ui.books.add.AddBookView
+import com.maty.android.bookshelves.ui.books.detail.BookDetailsActivity
 import kotlinx.android.synthetic.main.fragment_books.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
-class AllBooksFragment : Fragment() {
+class AllBooksFragment : Fragment(), AddBookView {
 
   private lateinit var viewModel : BookViewModel
 
@@ -32,6 +40,27 @@ class AllBooksFragment : Fragment() {
 
     initMenu()
     dismissFABOnScroll()
+  }
+
+  override fun onStop() {
+    super.onStop()
+    hideLoading()
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+
+    if (result != null) {
+      showLoading()
+      if (result.contents != null) {
+        GlobalScope.launch {
+          val book = viewModel.findBookByISBN(result.contents)
+          onBookAdded(book)
+        }
+      } else
+        showBookError()
+    } else
+      super.onActivityResult(requestCode, resultCode, data)
   }
 
   private fun dismissFABOnScroll() {
@@ -63,5 +92,36 @@ class AllBooksFragment : Fragment() {
 
   private fun openBarcodeScanner() {
     floatingActionMenu.hide()
+    viewModel.scanBarcode(this)
   }
+
+  override fun showBookError() {
+    hideLoading()
+    val duration = Toast.LENGTH_SHORT
+    val toast = Toast.makeText(requireContext(), resources.getString(R.string.book_error), duration)
+    toast.show()
+  }
+
+  override fun onBookAdded(book: Book) {
+    val intent = Intent(context, BookDetailsActivity::class.java)
+    intent.putExtra("book", book)
+    startActivity(intent)
+  }
+
+  override fun showLoading() {
+    scrollView.visibility = View.GONE
+    floatingActionMenu.hide()
+
+    shimmerLayout.startShimmerAnimation()
+    shimmerLayout.visibility = View.VISIBLE
+  }
+
+  override fun hideLoading() {
+    shimmerLayout.stopShimmerAnimation()
+    shimmerLayout.visibility = View.GONE
+
+    scrollView.visibility = View.VISIBLE
+    floatingActionMenu.show()
+  }
+
 }

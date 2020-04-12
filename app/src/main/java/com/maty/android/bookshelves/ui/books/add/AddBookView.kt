@@ -6,11 +6,7 @@ interface AddBookView {
 
   fun onBookAdded(book: Book)
 
-  fun showAddBookError()
-
   fun showBookError()
-
-  fun removeBookError()
 
   fun showLoading()
 
