@@ -7,6 +7,7 @@ import android.text.Html
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import com.bumptech.glide.Glide
 import com.maty.android.bookshelves.R
 import com.maty.android.bookshelves.common.BookAlreadySaved
@@ -32,6 +33,8 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
         val book: Book = intent.getParcelableExtra("book")
         showBook(book)
+        dismissFABOnScroll()
+
     }
 
     override fun showBook(book: Book) {
@@ -52,8 +55,6 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
                 coloredBackground.setBackgroundColor(getDominantColor(bitmap))
             }
         }
-
-
 
         showBookActions()
     }
@@ -146,5 +147,17 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
     override fun showBookError() {
         showGeneralError(this)
+    }
+
+    private fun dismissFABOnScroll() {
+        scrollable.setOnScrollChangeListener { _: NestedScrollView?, _: Int, scrollY: Int, _: Int, oldScrollY: Int ->
+            run {
+                if (scrollY > oldScrollY) {
+                    floatingActionMenu.hide();
+                } else {
+                    floatingActionMenu.show();
+                }
+            }
+        }
     }
 }
