@@ -42,7 +42,7 @@ data class Book(
         val textReviewsCount: Int?,
         val title: String,
         val titleWithoutSeries: String,
-        val imageUrl: String,
+        var imageUrl: String,
         val imageUrlSmall: String,
         val imageUrlLarge: String,
         val link: String,

@@ -37,18 +37,36 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         bookPreview.title.text = book.title
         bookPreview.author.text = book.author?.name
         bookDescription.text = Html.fromHtml(book.description, Html.FROM_HTML_MODE_LEGACY)
-        Glide.with(applicationContext).load(book.imageUrl).into(bookPreview.cover)
 
-        GlobalScope.launch {
-            val bitmap: Bitmap = Glide.with(applicationContext)
-                    .asBitmap()
-                    .load(book.imageUrl)
-                    .submit().get()
+        if (book.imageUrl.contains("nophoto")) {
+            fetchAndDisplayThumbnail(book)
+        } else {
+            Glide.with(applicationContext).load(book.imageUrl).into(bookPreview.cover)
 
-            coloredBackground.setBackgroundColor(getDominantColor(bitmap))
+            GlobalScope.launch {
+                val bitmap: Bitmap = Glide.with(applicationContext).asBitmap().load(book.imageUrl)
+                        .submit().get()
+
+                coloredBackground.setBackgroundColor(getDominantColor(bitmap))
+            }
         }
 
+
+
         showBookActions()
+    }
+
+    private fun fetchAndDisplayThumbnail(book: Book) {
+        GlobalScope.launch {
+            val img = viewModel.getThumbnail(book.title).replace("http", "https")
+            val bitmap: Bitmap = Glide.with(applicationContext).asBitmap().load(img).submit().get()
+
+            coloredBackground.setBackgroundColor(getDominantColor(bitmap))
+            runOnUiThread {
+                Glide.with(applicationContext).load(img).into(bookPreview.cover)
+                updateBookImage(img)
+            }
+        }
     }
 
     private fun showBookActions() {
@@ -102,6 +120,10 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
         this.book.status = status
         viewModel.update(this.book)
         redirectToHomepage()
+    }
+
+    private fun updateBookImage(img : String) {
+        this.book.imageUrl = img
     }
 
     override fun redirectToHomepage() {
