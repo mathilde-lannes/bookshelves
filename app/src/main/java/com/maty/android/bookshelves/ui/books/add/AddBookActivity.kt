@@ -4,15 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import com.google.zxing.integration.android.IntentIntegrator
-import com.google.zxing.integration.android.IntentResult
 import com.intmainreturn00.grapi.SearchResult
 import com.maty.android.bookshelves.R
-import com.maty.android.bookshelves.common.onClick
 import com.maty.android.bookshelves.model.Book
 import com.maty.android.bookshelves.ui.books.BookViewModel
 import com.maty.android.bookshelves.ui.books.add.suggestions.SuggestionAdapter
@@ -37,28 +35,13 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     hideLoading()
   }
 
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    val result: IntentResult? = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-
-    if (result != null) {
-      showLoading()
-      if (result.contents != null) {
-        GlobalScope.launch {
-          val book = viewModel.findBookByISBN(result.contents)
-          onBookAdded(book)
-        }
-      } else
-        showBookError()
-    } else
-      super.onActivityResult(requestCode, resultCode, data)
-  }
-
   private fun initUi() {
-    addBookButton.onClick { viewModel.scanBarcode(this) }
 
     val adapter = SuggestionAdapter(this, R.layout.item_suggestion, listOf())
     adapter.setViews(autocomplete, progressBar)
     autocomplete.setAdapter(adapter)
+    autocomplete.requestFocus()
+    autocomplete.showKeyboard()
 
     autocomplete.doAfterTextChanged {
       if (autocomplete.text.toString().length > 3)
@@ -86,10 +69,6 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     autocomplete.error = getString(R.string.book_error)
   }
 
-  fun removeBookError() {
-    autocomplete.error = null
-  }
-
   override fun onBookAdded(book: Book) {
     val intent = Intent(this, BookDetailsActivity::class.java)
     intent.putExtra("book", book)
@@ -100,8 +79,6 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
     runOnUiThread {
       autocomplete.hideKeyboard()
       autocomplete.visibility = View.GONE
-      or.visibility = View.GONE
-      addBookButton.visibility = View.GONE
 
       shimmerLayout.startShimmerAnimation()
       shimmerLayout.visibility = View.VISIBLE
@@ -114,13 +91,15 @@ class AddBookActivity : AppCompatActivity(), AddBookView {
       shimmerLayout.visibility = View.GONE
 
       autocomplete.visibility = View.VISIBLE
-      or.visibility = View.VISIBLE
-      addBookButton.visibility = View.VISIBLE
     }
   }
 
   private fun View.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
+  }
+
+  private fun View.showKeyboard() {
+    window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
   }
 }
