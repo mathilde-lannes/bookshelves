@@ -124,7 +124,6 @@ class BookDetailsActivity : AppCompatActivity(), BookDetailsView {
 
     private fun updateBookImage(img : String) {
         this.book.imageUrl = img
-        viewModel.update(this.book)
     }
 
     override fun redirectToHomepage() {
